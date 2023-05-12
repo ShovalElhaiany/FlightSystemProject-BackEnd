@@ -1,0 +1,13 @@
+טבלת Countries - *אתגר: הוסף שדה של תמונה (דגל) לכל מדינה 
+טבלת Users - (thumbnail) אתגר: הוסף שדה של תמונה לכל משתמש 
+
+לתוך טבלה User_roles יש להוסיף שלושה סיווגים: לקוח, חברת טיסה ומנהל.
+
+
+
+לבדוק:
+db.session.query(Tickets)
+AirlineCompanies.query.join(Users)
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'your_database_uri_here'
