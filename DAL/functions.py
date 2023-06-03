@@ -1,4 +1,4 @@
-from models import AirlineCompanies, Customers, Users, Flights, Tickets, db
+from models import Flights, AirlineCompanies, Users, Countries, Tickets, Customers, UserRoles, Administrators, db
 from datetime import datetime, timedelta
 from flask import jsonify
 
@@ -66,3 +66,20 @@ def get_tickets_by_customer(_customer_id):
                      'flight_id': ticket.flight_id,
                      'customer_id': ticket.customer_id} for ticket in tickets]
     return jsonify(tickets_list)
+
+# **************************************************************************************************
+
+def get_airlines_by_country(_country_id: int):
+    return AirlineCompanies.query.join(Countries).filter_by(id=_country_id).all()
+
+def get_flights_by_origin_country_id(_country_id: int):
+    return Flights.query.join(Countries).filter_by(id=_country_id).all()
+
+def get_flights_by_destination_country_id(_country_id: int):
+    return Flights.query.join(Countries).filter_by(id=_country_id).all()
+
+def get_flights_by_departure_date(_date):
+    return Flights.query.filter_by(departure_time=_date).all()
+
+def get_flights_by_landing_date(_date):
+    return Flights.query.filter_by(landing_time=_date).all()
