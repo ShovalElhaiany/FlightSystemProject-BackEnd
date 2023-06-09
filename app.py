@@ -1,19 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
 
-db = SQLAlchemy()
-login_manager= LoginManager()
-bcrypt = Bcrypt()
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Shoval963654@localhost:3306/flights_system_db'  # Replace with your MySQL database credentials
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-def create_app():
-    app = Flask(__name__)
-    app.secret_key = 'flaskey'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Shoval963654@localhost:3306/Flights_System_BD'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.init_app(app)
-    login_manager.init_app(app)
-    bcrypt.init_app(app)
+db = SQLAlchemy(app)
 
-    return app
+# Register routes
+from routes import setup_routes
+setup_routes(app)
+
+if __name__ == '__main__':
+    app.run()
