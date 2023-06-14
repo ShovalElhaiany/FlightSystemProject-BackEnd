@@ -1,4 +1,6 @@
 from app import db
+from flask_login import UserMixin
+
 
 class Flights(db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
@@ -15,7 +17,7 @@ class AirlineCompanies(db.Model):
     country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
     user_id = db.Column(db.BigInteger, db.ForeignKey('users.id'), unique=True)
 
-class Users(db.Model):
+class Users(UserMixin, db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     username = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
