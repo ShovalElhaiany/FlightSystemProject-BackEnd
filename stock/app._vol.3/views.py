@@ -1,5 +1,9 @@
 from flask import jsonify, request
-from business_logic import *
+from business_logic.BlGet import *
+from business_logic.BlAdd import *
+from business_logic.BlUpdate import *
+from business_logic.BlDelete import *
+from business_logic.BlSearches import *
 
 entity_fields = {
     # 'Administrators': {

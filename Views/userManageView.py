@@ -1,19 +1,16 @@
-
-from flask import Blueprint, request
+from flask import request
 from LoginValidations import validate_registration, validate_login
 from flask_login import login_user, logout_user, login_required
-from models import Users
+from Dal.models import Users
 from app import login_manager, db
 from flask import jsonify
 from flask_bcrypt import generate_password_hash
 
-user = Blueprint('/user', __name__)
 
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-@user.route('/register', methods=['POST'])
 def register():
         data = request.get_json()
         username = data['username']
@@ -34,7 +31,6 @@ def register():
             db.session.commit()
             return({'message': 'Registration successful!'})
 
-@user.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     username = data['username']
@@ -53,7 +49,6 @@ def login():
         return jsonify({'message': 'Login successful!'})
     
 
-@user.route('/logout', methods=['POST'])
 @login_required
 def logout():
     logout_user()

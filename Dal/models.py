@@ -1,7 +1,6 @@
 from app import db
 from flask_login import UserMixin
 
-
 class Flights(db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     airline_company_id = db.Column(db.BigInteger, db.ForeignKey('airline_companies.id'))

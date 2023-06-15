@@ -1,13 +1,18 @@
-from Views.crudView import *
-from Views.searchesView import *
-from Views.userManageView import *
-from bluePrints import *
+from views.ViewCrud import *
+from views.ViewSearches import *
+from flask import Blueprint
 
+# Blueprints
+get=Blueprint('get', __name__)
+add=Blueprint('add', __name__)
+update=Blueprint('update', __name__)
+remove=Blueprint('remove', __name__)
+searche=Blueprint('searches', __name__)
+
+# CRUD Routes
 def setup_routes(app):
     models = ['Flights', 'AirlineCompanies', 'Users', 'Countries', 'Tickets', 'Customers', 'UserRoles', 'Administrators']
     for model in models:
-
-# CRUD Routes
         get.add_url_rule(f'/{model.lower()}/<int:entity_id>', methods=['GET'], view_func=get_entity_endpoint)
         get.add_url_rule(f'/{model.lower()}', methods=['GET'], view_func=get_all_entities_endpoint)
         add.add_url_rule(f'/add_{model.lower()}', methods=['POST'], view_func=add_entity_endpoint)
@@ -33,12 +38,65 @@ def setup_routes(app):
         searche.add_url_rule('/users/username/<username>', methods=['GET'], view_func=get_user_by_username)
         searche.add_url_rule('/tickets/customer/<int:customer_id>', methods=['GET'], view_func=get_tickets_by_customer)
         searche.add_url_rule('/customers/username/<username>', methods=['GET'], view_func=get_customer_by_username)
-        searche.add_url_rule('flights/customer/<int:customer_id>', methods=['GET'], view_func=get_flights_by_customer)
-        searche.add_url_rule('/airlines/parameters', methods=['GET'], view_func=get_airlines_by_parameters)
 
 #**********************************************************************************************************************************
 
-# User Routes
-        user.add_url_rule('/login', methods=['POST'], view_func=login)
-        user.add_url_rule('/logout', methods=['POST'], view_func=logout)
-        user.add_url_rule('/register', methods=['POST'], view_func=register)
+from flask import Blueprint, request
+from LoginValidations import validate_registration, validate_login
+from flask_login import login_user, logout_user, login_required
+from dal.DalModels import Users
+from app import login_manager, db
+from flask import jsonify
+from flask_bcrypt import generate_password_hash
+
+user = Blueprint('/user', __name__)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+@user.route('/register', methods=['POST'])
+def register():
+        data = request.get_json()
+        username = data['username']
+        password = data['password']
+        email = data['email']
+        user_role = data['user_role']
+        validation_errors = validate_registration(username, password, email, user_role)
+
+        if validation_errors:
+            return jsonify(validation_errors)
+        else:
+            user = Users(username=username,
+                        password=generate_password_hash(password),
+                        email=email,
+                        user_role=user_role
+                        )
+            db.session.add(user)
+            db.session.commit()
+            return({'message': 'Registration successful!'})
+
+@user.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
+    validation_errors = validate_login(username, password)
+
+    if validation_errors:
+        return jsonify(validation_errors)
+    else:
+        try:
+            user = Users.query.filter_by(username=username).first()
+        except Exception as e:
+            return jsonify({'error':e})
+    
+        login_user(user)
+        return jsonify({'message': 'Login successful!'})
+    
+
+@user.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return jsonify({'message': 'Logout successful!'})

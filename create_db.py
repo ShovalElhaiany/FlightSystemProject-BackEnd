@@ -1,7 +1,7 @@
 from app import db
 
 # Import your models here
-from models import *
+from Dal.models import *
 
 # Create the database tables
 db.create_all()
