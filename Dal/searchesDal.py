@@ -24,16 +24,18 @@ def get_flights_by_landing_date_dal(date):
 def get_arrival_flights_dal(country_id):
     current_time = datetime.utcnow()
     time_12_hours_later = current_time + timedelta(hours=12)
-
+    
     return db.session.query(Flights).filter(Flights.destination_country_id == country_id,
-                                            Flights.landing_time.between(current_time, time_12_hours_later)).all()
+                                            Flights.landing_time >= current_time,
+                                            Flights.landing_time < time_12_hours_later).all()
 
 def get_departure_flights_dal(country_id):
     current_time = datetime.utcnow()
     time_12_hours_later = current_time + timedelta(hours=12)
 
     return db.session.query(Flights).filter(Flights.origin_country_id == country_id,
-                                            Flights.departure_time.between(current_time, time_12_hours_later)).all()
+                                            Flights.departure_time >= current_time,
+                                            Flights.departure_time < time_12_hours_later).all()
 
 def get_airline_by_username_dal(username):
     return AirlineCompanies.query.join(Users).filter_by(username=username).first()
