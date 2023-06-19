@@ -2,9 +2,9 @@ from Dal.models import *
 
 entity_fields = {
     # 'Administrators': {
-        'model': Administrators,
-        'name': 'Administrator',
-        'fields': ['id', 'first_name', 'last_name', 'user_id']
+        # 'model': Administrators,
+        # 'name': 'Administrator',
+        # 'fields': ['id', 'first_name', 'last_name', 'user_id']
     # },
     # 'Flights': {
         # 'model': Flights,
@@ -17,9 +17,9 @@ entity_fields = {
         # 'fields': ['id', 'name', 'country_id', 'user_id']
     # },
     # 'Users': {
-        # 'model': Users,
-        # 'name': 'User',
-        # 'fields': ['id', 'username', 'password', 'email', 'user_role']
+        'model': Users,
+        'name': 'User',
+        'fields': ['id', 'username', 'password', 'email', 'user_role']
     # },
     # 'Countries': {
         # 'model': Countries,
@@ -27,9 +27,9 @@ entity_fields = {
         # 'fields': ['id', 'name']
     # },
     # 'Tickets': {
-    #     'model': Tickets,
-    #     'name': 'Ticket',
-    #     'fields': ['id', 'flight_id', 'customer_id']
+        # 'model': Tickets,
+        # 'name': 'Ticket',
+        # 'fields': ['id', 'flight_id', 'customer_id']
     # },
     # 'Customers': {
         # 'model': Customers,
@@ -37,8 +37,8 @@ entity_fields = {
         # 'fields': ['id', 'first_name', 'last_name', 'address', 'phone_no', 'credit_card_no', 'user_id']
     # },
     # 'UserRoles': {
-    #     'model': UserRoles,
-    #     'name': 'User Role',
-    #     'fields': ['id', 'role_name']
+        # 'model': UserRoles,
+        # 'name': 'User Role',
+        # 'fields': ['id', 'role_name']
     # }
 }

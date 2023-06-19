@@ -6,10 +6,8 @@ class AnonymousFacade(FacadeBase):
         super().__init__(None)
 
     @classmethod
-    def login(self, username, password):
-       return redirect(url_for('user.login', 
-                               username=username, 
-                               password=password))
+    def login(self):
+       return redirect(url_for('user.login'))
 
     @classmethod
     def add_customer(self):

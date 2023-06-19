@@ -31,8 +31,8 @@ def setup_routes(app):
         searche.add_url_rule('/flights/destination-country/<int:country_id>', methods=['GET'], view_func=get_flights_by_destination_country_id)
         searche.add_url_rule('/flights/departure-date/<date>', methods=['GET'], view_func=get_flights_by_departure_date)
         searche.add_url_rule('/flights/landing-date/<date>', methods=['GET'], view_func=get_flights_by_landing_date)
-        # searche.add_url_rule('/flights/arrival-flights/<int:country_id>', methods=['GET'], view_func=get_arrival_flights)
-        # searche.add_url_rule('/flights/departure-flights/<int:country_id>', methods=['GET'], view_func=get_departure_flights)
+        # search.add_url_rule('/flights/arrival-flights/<int:country_id>', methods=['GET'], view_func=get_arrival_flights)
+        # search.add_url_rule('/flights/departure-flights/<int:country_id>', methods=['GET'], view_func=get_departure_flights)
         searche.add_url_rule('/airlines/username/<username>', methods=['GET'], view_func=get_airline_by_username)
         searche.add_url_rule('/airlines/country/<int:country_id>', methods=['GET'], view_func=get_airlines_by_country)
         searche.add_url_rule('/users/username/<username>', methods=['GET'], view_func=get_user_by_username)
@@ -44,7 +44,7 @@ def setup_routes(app):
 from flask import Blueprint, request
 from LoginValidations import validate_registration, validate_login
 from flask_login import login_user, logout_user, login_required
-from dal.DalModels import Users
+from Dal.models import Users
 from app import login_manager, db
 from flask import jsonify
 from flask_bcrypt import generate_password_hash

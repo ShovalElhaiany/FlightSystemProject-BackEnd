@@ -19,11 +19,8 @@ class FacadeBase(ABC):
 
     @classmethod
     @abstractmethod
-    def get_flights_by_parameters(self, origin_country_id, destination_country_id, date):
-        return redirect(url_for('searche.get_flights_by_parameters', 
-                                origin_country_id=origin_country_id,
-                                destination_country_id=destination_country_id,
-                                date=date))
+    def get_flights_by_parameters(self):
+        return redirect(url_for('search.get_flights_by_parameters'))
 
     @classmethod
     @abstractmethod
@@ -37,10 +34,8 @@ class FacadeBase(ABC):
 
     @classmethod
     @abstractmethod
-    def get_airline_by_parameters(self, name, country_id):
-        return redirect(url_for('searche.get_airlines_by_parameters',
-                                name=name,
-                                country_id=country_id))
+    def get_airline_by_parameters(self):
+        return redirect(url_for('search.get_airlines_by_parameters'))
     
     @classmethod
     @abstractmethod
