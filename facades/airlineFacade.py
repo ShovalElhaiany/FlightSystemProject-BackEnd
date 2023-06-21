@@ -32,7 +32,7 @@ class AirlineFacade(AnonymousFacade):
     @classmethod
     @login_required
     def get_my_flights(self, customer_id):
-        pass
+        return redirect(url_for('search.get_flights_by_customer', customer_id=customer_id))
 
 
 

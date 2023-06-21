@@ -1,5 +1,5 @@
-from Dal.crudDal import *
-from Dal.searchesDal import *
+from dal.crudDal import *
+from dal.searchesDal import *
 
 def get_flights_by_parameters_bl(origin_country_id, destination_country_id, date):
     flights = get_flights_by_parameters_dal(origin_country_id, destination_country_id, date)
@@ -186,10 +186,11 @@ def get_flights_by_customer_bl(customer_id):
     flights = get_flights_by_customer_dal(customer_id)
 
     flights_list = [{'id': flight.id,
-                     'origin_country': flight.origin_country.name,
-                     'destination_country': flight.destination_country.name,
-                     'departure_time': flight.departure_time.strftime('%Y-%m-%d %H:%M:%S'),
-                     'landing_time': flight.landing_time.strftime('%Y-%m-%d %H:%M:%S'),
+                     'airline_company_id': flight.airline_company_id,
+                     'origin_country_id': flight.origin_country_id,
+                     'destination_country_id': flight.destination_country_id,
+                     'departure_time': flight.departure_time.isoformat(),
+                     'landing_time': flight.landing_time.isoformat(),
                      'remaining_tickets': flight.remaining_tickets} for flight in flights]
 
     return flights_list

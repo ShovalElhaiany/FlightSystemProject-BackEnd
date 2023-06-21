@@ -65,7 +65,7 @@ def get_customer_by_username(username):
     return jsonify(customer_data)
 
 def get_flights_by_customer(customer_id):
-    flights_list = get_flights_by_customer(customer_id)
+    flights_list = get_flights_by_customer_bl(customer_id)
     return jsonify(flights_list)
 
 def get_airlines_by_parameters():

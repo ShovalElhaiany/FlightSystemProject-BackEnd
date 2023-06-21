@@ -1,4 +1,4 @@
-from Dal.models import *
+from dal.models import *
 
 entity_fields = {
     # 'Administrators': {

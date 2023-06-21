@@ -53,8 +53,12 @@ def get_customer_by_username_dal(username):
     return Customers.query.join(Users).filter(Users.username == username).first()
 
 def get_flights_by_customer_dal(customer_id):
-    customer_ticket = Tickets.query.join(Customers).filter_by(id=customer_id).first()
-    return Flights.query.filter_by(id = customer_ticket.flight_id).first()
+    customer_tickets = Tickets.query.join(Customers).filter_by(id=customer_id).all()
+    flights =[]
+    for ticket in customer_tickets:
+        flight = Flights.query.filter_by(id = ticket.flight_id).first()
+        flights.append(flight)
+    return flights
 
 def get_airline_by_parameters_dal(name, country_id):
     airlines = AirlineCompanies.query.filter_by(name=name,

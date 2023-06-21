@@ -1,5 +1,5 @@
-from Dal.crudDal import *
-from Dal.searchesDal import *
+from dal.crudDal import *
+from dal.searchesDal import *
 
 def add_entity_data(entity_data, entity_fields):
     if 'id' in entity_data:

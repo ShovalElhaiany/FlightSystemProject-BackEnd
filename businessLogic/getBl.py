@@ -1,5 +1,5 @@
-from Dal.crudDal import *
-from Dal.searchesDal import *
+from dal.crudDal import *
+from dal.searchesDal import *
 
 def get_entity_data(entity_id, entity_fields):
     entity = get_entity(entity_fields['model'], entity_id)

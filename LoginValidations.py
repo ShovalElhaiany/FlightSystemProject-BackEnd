@@ -1,5 +1,5 @@
 from flask_bcrypt import check_password_hash
-from Dal.models import Users
+from dal.models import Users
 
 
 def validate_registration(username, password, email, user_role):
