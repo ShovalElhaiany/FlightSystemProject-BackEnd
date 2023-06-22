@@ -1,21 +1,21 @@
-from Views.crudView import *
-from Views.searchesView import *
-from Views.userManageView import *
+from views.crudView import *
+from views.searchesView import *
+from views.userManageView import *
 from bluePrints.csuBp import *
+from config import MODELS_NAMES
 
 def setup_csuRoutes(app):
-    models = ['Flights', 'AirlineCompanies', 'Users', 'Countries', 'Tickets', 'Customers', 'UserRoles', 'Administrators']
-    for model in models:
+    for model_name in MODELS_NAMES:
 
 # CRUD Routes
-        get.add_url_rule(f'/{model.lower()}/<int:entity_id>', methods=['GET'], view_func=get_entity_endpoint, endpoint='get_entity_endpoint')
-        get.add_url_rule(f'/{model.lower()}', methods=['GET'], view_func=get_all_entities_endpoint, endpoint='get_all_entities')
-        add.add_url_rule(f'/add_{model.lower()}', methods=['POST'], view_func=add_entity_endpoint, endpoint='add_entity_endpoint')
-        add.add_url_rule(f'/{model.lower()}', methods=['POST'], view_func=add_entities_endpoint, endpoint='add_entities_endpoint')
-        update.add_url_rule(f'/{model.lower()}/<int:entity_id>', methods=['PUT'], view_func=update_entity_endpoint, endpoint='update_entity_endpoint')
-        update.add_url_rule(f'/{model.lower()}', methods=['PUT'], view_func=update_entities_endpoint, endpoint='update_entities_endpoint')
-        remove.add_url_rule(f'/{model.lower()}/<int:entity_id>', methods=['DELETE'], view_func=remove_entity_endpoint, endpoint='remove_entity_endpoint')
-        remove.add_url_rule(f'/{model.lower()}', methods=['DELETE'], view_func=remove_all_entities_endpoint, endpoint='remove_all_entities_endpoint')
+        get.add_url_rule(f'/{model_name.lower()}/<int:entity_id>', methods=['GET'], view_func=get_entity_endpoint, endpoint='get_entity_endpoint')
+        get.add_url_rule(f'/{model_name.lower()}', methods=['GET'], view_func=get_all_entities_endpoint, endpoint='get_all_entities')
+        add.add_url_rule(f'/add_{model_name.lower()}', methods=['POST'], view_func=add_entity_endpoint, endpoint='add_entity_endpoint')
+        add.add_url_rule(f'/{model_name.lower()}', methods=['POST'], view_func=add_entities_endpoint, endpoint='add_entities_endpoint')
+        update.add_url_rule(f'/{model_name.lower()}/<int:entity_id>', methods=['PUT'], view_func=update_entity_endpoint, endpoint='update_entity_endpoint')
+        update.add_url_rule(f'/{model_name.lower()}', methods=['PUT'], view_func=update_entities_endpoint, endpoint='update_entities_endpoint')
+        remove.add_url_rule(f'/{model_name.lower()}/<int:entity_id>', methods=['DELETE'], view_func=remove_entity_endpoint, endpoint='remove_entity_endpoint')
+        remove.add_url_rule(f'/{model_name.lower()}', methods=['DELETE'], view_func=remove_all_entities_endpoint, endpoint='remove_all_entities_endpoint')
 
 #**********************************************************************************************************************************
 

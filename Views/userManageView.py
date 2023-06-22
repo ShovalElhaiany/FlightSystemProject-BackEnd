@@ -1,10 +1,9 @@
 from flask import request
-from LoginValidations import validate_registration, validate_login
+from LoginValidations import validate_login
 from flask_login import login_user, logout_user, login_required
 from dal.models import Users
-from app import login_manager, db
+from app import login_manager
 from flask import jsonify
-from flask_bcrypt import generate_password_hash
 
 
 @login_manager.user_loader

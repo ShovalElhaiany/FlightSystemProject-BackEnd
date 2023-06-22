@@ -1,13 +1,13 @@
-from Views.crudView import *
-from Views.searchesView import *
-from Views.userManageView import *
+from views.crudView import *
+from views.searchesView import *
+from views.userManageView import *
 from facades.facadeBase import *
 from facades.anonymousFacade import *
 from facades.customerFacade import *
 from facades.airlineFacade import *
 from facades.administratorFacade import *
 from bluePrints.csuBp import *
-from bluePrints.FacadesBp import *
+from bluePrints.facadesBp import *
 
 def setup_routes(app):
     models = ['Flights', 'AirlineCompanies', 'Users', 'Countries', 'Tickets', 'Customers', 'UserRoles', 'Administrators']

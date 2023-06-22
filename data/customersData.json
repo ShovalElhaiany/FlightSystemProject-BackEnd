@@ -28,5 +28,3 @@
  {"id": 28, "first_name": "Alexander", "last_name": "Parker", "address": "876 Cedar St", "phone_no": "555-99919", "credit_card_no": "** ** **** **** 99199", "user_id": 29},
  {"id": 29, "first_name": "Harper", "last_name": "Collins", "address": "109 Pine St", "phone_no": "555-00010", "credit_card_no": "** ** **** **** 01000", "user_id": 30},
  {"id": 30, "first_name": "Liam", "last_name": "Smith", "address": "210 Elm St", "phone_no": "555-11111", "credit_card_no": "** ** **** **** 11111", "user_id": 31}]
-
- 

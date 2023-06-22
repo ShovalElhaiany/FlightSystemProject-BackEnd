@@ -3,7 +3,7 @@ from facades.anonymousFacade import *
 from facades.customerFacade import *
 from facades.airlineFacade import *
 from facades.administratorFacade import *
-from bluePrints.FacadesBp import *
+from bluePrints.facadesBp import *
 
 def setup_facadesRoutes(app):
 
