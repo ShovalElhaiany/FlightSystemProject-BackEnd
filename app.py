@@ -5,6 +5,7 @@ from flask_bcrypt import Bcrypt
 from bluePrints.facadesBp import setup_FacadesBp
 from bluePrints.csuBp import setup_csuBp
 from config import Config
+from create_db import db
 
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -15,6 +16,7 @@ def create_app():
     app.config.from_object(Config)
     
     # Initialize extensions
+    db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
     

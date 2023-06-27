@@ -2,9 +2,8 @@ from flask import request
 from LoginValidations import validate_login
 from flask_login import login_user, logout_user, login_required
 from dal.models import Users
-from app import login_manager
+from app import login_manager, db
 from flask import jsonify
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -34,3 +33,37 @@ def logout():
     return jsonify({'message': 'Logout successful!'})
 
 
+import random
+import string
+
+def create_user_with_random_data(user_role):
+    # Generate random values for Username, password, and email
+    username = ''.join(random.choices(string.ascii_letters, k=8))
+    password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    email = ''.join(random.choices(string.ascii_letters, k=8)) + '@example.com'
+
+    # Check if an object with similar values already exists
+    try:
+        existing_user = Users.query.filter_by(user_role=user_role,
+                                          Username=username,
+                                          email=email).first()
+    except Exception as e:
+        existing_user = None
+        
+    if existing_user:
+        print("An object with similar values already exists.")
+        raise Exception
+
+    # Create a new Users object
+    new_user = Users(username=username,
+                     password=password,
+                     email=email,
+                     user_role=user_role)
+
+    # Insert the new object into the database
+    db.session.add(new_user)
+    db.session.commit()
+
+    print("New user created and inserted into the database.")
+    
+    return new_user

@@ -1,6 +1,7 @@
 from .anonymousFacade import AnonymousFacade
 from flask_login import login_required
 from flask import redirect, url_for
+from config import USER_ROLES
 
 class AdministratorFacade(AnonymousFacade):
     def __init__(self, user):
@@ -15,11 +16,15 @@ class AdministratorFacade(AnonymousFacade):
     @classmethod
     @login_required
     def add_airline(self):
+        user_role = USER_ROLES['AirlineCompanies']
+        AnonymousFacade.create_new_user(user_role)
         return redirect(url_for('add.add_entity_endpoint'))
 
     @classmethod
     @login_required
     def add_administrator(self):
+        user_role = USER_ROLES['Administrators']
+        AnonymousFacade.create_new_user(user_role)
         return redirect(url_for('add.add_entity_endpoint'))
 
     @classmethod

@@ -10,3 +10,9 @@ MODELS = [ UserRoles, Users, Administrators, Customers, Countries, AirlineCompan
 MODELS_NAMES = [ MODEL.__name__ for MODEL in MODELS ]
 
 DATA_FOLDER = "data/"
+
+USER_ROLES = {
+    'Administrators': 1,
+    'Customers': 2,
+    'AirlineCompanies': 3
+}
