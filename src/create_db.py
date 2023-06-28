@@ -1,19 +1,21 @@
-from flask_sqlalchemy import SQLAlchemy
+from src.myApp import db
 import os
 import json
 
-db = SQLAlchemy()
+from .config import MODELS, DATA_FOLDER
 
-def create_tables(app):
-    """Creates tables and inserts data."""
-    db.init_app(app)
+def create_tables():
+    """
+    Creates the db
+
+    Args:
+        app (Flask): The flask app to create tables for. Assumes the db is already initiated to this app
+    """    
     db.create_all()
     print("Tables created successfully!")
 
-def insert_data(app):
+def insert_data():
     # Insert data into multiple tables
-    from config import MODELS, DATA_FOLDER
-
     for model in MODELS:
         model_name = model.__name__
         model_file = f"{model_name[0].lower() + model_name[1:]}Data.json"

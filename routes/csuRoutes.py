@@ -2,9 +2,9 @@ from views.crudView import *
 from views.searchesView import *
 from views.userManageView import *
 from bluePrints.csuBp import *
-from config import MODELS_NAMES
+from src.config import MODELS_NAMES
 
-def setup_csuRoutes(app):
+def setup_csuRoutes():
     for model_name in MODELS_NAMES:
 
 # CRUD Routes

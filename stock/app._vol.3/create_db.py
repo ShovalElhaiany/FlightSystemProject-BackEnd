@@ -1,4 +1,4 @@
-from app import app, db
+from create_app import app, db
 
 # Import your models here
 from dal.models import *

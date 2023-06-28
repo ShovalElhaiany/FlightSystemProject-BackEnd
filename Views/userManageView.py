@@ -1,9 +1,10 @@
-from flask import request
-from LoginValidations import validate_login
-from flask_login import login_user, logout_user, login_required
+from flask import jsonify, request
+from flask_login import login_required, login_user, logout_user
+
+from src.myApp import db, login_manager
 from dal.models import Users
-from app import login_manager, db
-from flask import jsonify
+from LoginValidations import validate_login
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -35,6 +36,7 @@ def logout():
 
 import random
 import string
+
 
 def create_user_with_random_data(user_role):
     # Generate random values for Username, password, and email

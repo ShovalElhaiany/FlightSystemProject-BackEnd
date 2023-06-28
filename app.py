@@ -1,39 +1,34 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
-from bluePrints.facadesBp import setup_FacadesBp
-from bluePrints.csuBp import setup_csuBp
-from config import Config
-from create_db import db
+import subprocess
+import venv
 
-bcrypt = Bcrypt()
-login_manager = LoginManager()
+from src.myApp import app
+from src.create_app import init_app
+from src.create_db import create_tables, insert_data
+import os
+LOCK_FILE = "./lock"
 
-def create_app():
-    # App configuration
-    app = Flask(__name__)
-    app.config.from_object(Config)
-    
-    # Initialize extensions
-    db.init_app(app)
-    bcrypt.init_app(app)
-    login_manager.init_app(app)
-    
-    # Register routes and blueprints
-    from routes.csuRoutes import setup_csuRoutes
-    from routes.facadesRoutes import setup_facadesRoutes
 
-    setup_csuRoutes(app)
-    setup_facadesRoutes(app)
-    setup_FacadesBp(app)
-    setup_csuBp(app)
 
-    login_manager.login_view = 'csuRoutes.login'
+def setup_env():
+    venv_path = '.venv'
+    requirements_file = 'requirements.txt'
 
-    app.app_context().push()
-    return app
+    venv.create(venv_path, with_pip=True)
+    activate_script = 'Scripts\\activate.bat'
+    activate_path = f'{venv_path}/{activate_script}'
+
+    subprocess.call(f'call {activate_path} && pip install -r {requirements_file}', shell=True)
+
+def deploy():
+    setup_env()
+    init_app()
+    create_tables()
+    insert_data()
 
 if __name__ == '__main__':
-    app = create_app()
+    if not os.path.exists(LOCK_FILE):
+        deploy()
+        open(LOCK_FILE, 'w').close()
+    else:
+        init_app()
     app.run(debug=True)

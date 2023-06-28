@@ -5,7 +5,7 @@ from facades.airlineFacade import *
 from facades.administratorFacade import *
 from bluePrints.facadesBp import *
 
-def setup_facadesRoutes(app):
+def setup_facadesRoutes():
 
 # FacadeBase
         facadeBase.add_url_rule('/flights', methods=['GET'], view_func=FacadeBase.get_all_flights)

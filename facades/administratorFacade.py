@@ -1,7 +1,7 @@
 from .anonymousFacade import AnonymousFacade
 from flask_login import login_required
 from flask import redirect, url_for
-from config import USER_ROLES
+from src.config import USER_ROLES
 
 class AdministratorFacade(AnonymousFacade):
     def __init__(self, user):

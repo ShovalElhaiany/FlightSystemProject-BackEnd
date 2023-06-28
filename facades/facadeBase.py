@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
-from flask import redirect, url_for
-from flask import request
+
+from flask import redirect, request, url_for
+
+from views.userManageView import create_user_with_random_data
+
 
 class FacadeBase(ABC):
     @abstractmethod
@@ -50,15 +53,10 @@ class FacadeBase(ABC):
     @classmethod
     @abstractmethod
     def create_new_user(self, user_role):
-        from views.userManageView import create_user_with_random_data
         new_user = create_user_with_random_data(user_role)
 
         # Inserts the user_id into the request
-        data = request.form
-        updated_data = data["user_id"] = new_user.id
+        data = request.get_json()
+        data['user_id'] = new_user.id
 
-        return updated_data
-
-        
-
-
+        return data

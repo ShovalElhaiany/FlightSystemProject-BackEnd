@@ -1,6 +1,8 @@
-from create_db import db
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
+
+from src.myApp import db
+
 
 class Flights(db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)

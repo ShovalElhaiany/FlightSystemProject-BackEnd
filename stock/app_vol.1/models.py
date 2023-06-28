@@ -1,4 +1,4 @@
-from app import db
+from src.myApp import db
 
 class Flights(db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)

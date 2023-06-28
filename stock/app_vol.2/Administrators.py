@@ -3,7 +3,7 @@ from ..app import create_app, db
 from ..DAL.models import Administrators
 
 app = create_app
-
+print("STOCK")
 @app.route('/administrators/<int:admin_id>', methods=['GET'])
 def get_admin(admin_id):
     admin = Administrators.query.get(admin_id)
