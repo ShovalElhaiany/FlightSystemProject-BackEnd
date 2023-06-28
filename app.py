@@ -1,14 +1,6 @@
 import subprocess
 import venv
 
-from src.myApp import app
-from src.create_app import init_app
-from src.create_db import create_tables, insert_data
-import os
-LOCK_FILE = "./lock"
-
-
-
 def setup_env():
     venv_path = '.venv'
     requirements_file = 'requirements.txt'
@@ -19,8 +11,15 @@ def setup_env():
 
     subprocess.call(f'call {activate_path} && pip install -r {requirements_file}', shell=True)
 
+setup_env()
+
+from src.myApp import app
+from src.create_app import init_app
+from src.create_db import create_tables, insert_data
+import os
+LOCK_FILE = "./lock"
+
 def deploy():
-    setup_env()
     init_app()
     create_tables()
     insert_data()
