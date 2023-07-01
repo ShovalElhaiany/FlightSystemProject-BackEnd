@@ -1,7 +1,7 @@
 from .facadeBase import FacadeBase
 from flask import redirect, url_for
-from src.config import USER_ROLES
-from flask import request
+from views.crudView import add_entity_endpoint
+
 
 class AnonymousFacade(FacadeBase):
     def __init__(self):
@@ -13,7 +13,7 @@ class AnonymousFacade(FacadeBase):
 
     @classmethod
     def add_customer(self):
-        user_role = USER_ROLES['Customers']
-        updated_request = FacadeBase.create_new_user(user_role)
-        # request.data = updated_request
-        return redirect(url_for('add.add_entity_endpoint'))
+        model = 'Customers'
+        FacadeBase.edit_add_entity_request(model)
+        response = add_entity_endpoint()
+        return response

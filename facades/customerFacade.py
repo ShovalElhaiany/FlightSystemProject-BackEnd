@@ -1,7 +1,7 @@
 from .anonymousFacade import AnonymousFacade
 from flask_login import login_required
 from flask import redirect, url_for
-
+    
 class CustomerFacade(AnonymousFacade):
     def __init__(self, user):
         super().__init__()

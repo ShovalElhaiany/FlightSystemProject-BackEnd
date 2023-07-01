@@ -2,7 +2,7 @@ from src.myApp import app
 from src.create_app import init_app
 from src.create_db import create_tables, insert_data
 import os
-LOCK_FILE = "./lock"
+LOCK_FILE = "temp/lock"
 
 def deploy():
     init_app()

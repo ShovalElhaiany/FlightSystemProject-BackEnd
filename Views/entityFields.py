@@ -49,12 +49,15 @@ def extracts_entity_fields(request):
     url_model = parts[4]
 
     for entity_name, entity_data in entities_fields.items():
-            if entity_name.lower() == url_model:
-                return {
-                    'model': entity_data['model'],
-                    'name': entity_data['name'],
-                    'fields': entity_data['fields']
-                }
-        
+        url_model.split("_")
+        if 'add_' in url_model:
+            url_model = url_model[4:]
+        if entity_name.lower() == url_model:
+            return {
+                'model': entity_data['model'],
+                'name': entity_data['name'],
+                'fields': entity_data['fields']
+            }
+    
 
 

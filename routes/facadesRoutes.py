@@ -31,7 +31,7 @@ def setup_facadesRoutes():
         airlineFacade.add_url_rule('/flights', methods=['POST'], view_func=AirlineFacade.add_flight)
         airlineFacade.add_url_rule('/flights/<int:flight_id>', methods=['PUT'], view_func=AirlineFacade.update_flight)
         airlineFacade.add_url_rule('/flights/<int:flight_id>', methods=['DELETE'], view_func=AirlineFacade.remove_flight)
-        airlineFacade.add_url_rule('/myflights/<int:customer_id>', methods=['GET'], view_func=AirlineFacade.get_my_flights)
+        airlineFacade.add_url_rule('/flights/customer/<int:customer_id>', methods=['GET'], view_func=AirlineFacade.get_my_flights)
 
 #**********************************************************************************************************************************
 
@@ -49,4 +49,4 @@ def setup_facadesRoutes():
         customerFacade.add_url_rule('/customers/<int:customer_id>', methods=['PUT'], view_func=CustomerFacade.update_customer)
         customerFacade.add_url_rule('/tickets', methods=['POST'], view_func=CustomerFacade.add_ticket)
         customerFacade.add_url_rule('/tickets/<int:ticket_id>', methods=['DELETE'], view_func=CustomerFacade.remove_ticket)
-        customerFacade.add_url_rule('/mytickets/<int:customer_id>', methods=['GET'], view_func=CustomerFacade.get_my_tickets)
+        customerFacade.add_url_rule('/tickets/customer/<int:customer_id>', methods=['GET'], view_func=CustomerFacade.get_my_tickets)

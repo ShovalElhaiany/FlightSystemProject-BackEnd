@@ -3,7 +3,7 @@ from flask_login import login_required, login_user, logout_user
 
 from src.myApp import db, login_manager
 from dal.models import Users
-from LoginValidations import validate_login
+from validations.LoginValidations import validate_login
 
 
 @login_manager.user_loader

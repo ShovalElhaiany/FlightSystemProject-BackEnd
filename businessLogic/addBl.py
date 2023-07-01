@@ -20,4 +20,3 @@ def add_entities_data(entities_data, entity_fields):
 
     add_entities(entity_fields['model'], entities_data_filtered)
     return {'message': f'{entity_fields["name"]}s successfully added'}
-
