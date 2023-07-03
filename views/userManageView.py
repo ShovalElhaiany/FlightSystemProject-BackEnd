@@ -1,11 +1,11 @@
 from flask import jsonify, request
 from flask_login import login_required, login_user, logout_user
 
-from src.myApp import db, login_manager
+from src.myApp import app, db, login_manager
 from dal.models import Users
 from validations.LoginValidations import validate_login
 
-
+@app.before_request
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))

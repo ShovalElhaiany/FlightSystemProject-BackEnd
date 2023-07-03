@@ -1,7 +1,31 @@
 from flask_bcrypt import check_password_hash, generate_password_hash
 from dal.models import Users
+from src.myApp import app
+import functools
+from flask import g, redirect, url_for, request
+from src.config import ROLES_PERMISSIONS
 
+@app.before_request
+def set_user_role():
+    g.user_role = request.headers.get('User-Role')
 
+def permission_only(allowed_roles):
+    def decorator(view):
+        @functools.wraps(view)
+        def wrapped_view(*args):
+            if g.user_role not in allowed_roles:
+                return redirect(url_for('AnonymousFacade.login'))
+            role_permissions = ROLES_PERMISSIONS[allowed_roles]
+            if view.__name__ not in role_permissions:
+                return redirect(url_for('AnonymousFacade.login'))
+            return view(*args)
+        return wrapped_view
+    return decorator
+
+@app.before_request
+@permission_only(['Customers'])
+def some_view():
+    pass
 
 def validate_registration(username, password, email, user_role):
     errors = []

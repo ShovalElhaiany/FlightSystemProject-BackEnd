@@ -41,3 +41,9 @@ USER_ROLES = {
     'Customers': 2,
     'AirlineCompanies': 3
 }
+
+ROLES_PERMISSIONS = {
+    'Customers': ['update_customer', 'add_ticket', 'remove_ticket', 'get_my_tickets'],
+    'AirlineCompanies': ['update_airline', 'add_flight', 'update_flight', 'remove_flight', 'get_my_flights'],
+    'Administrators': ['get_all_customers', 'add_airline', 'add_administrator', 'remove_airline', 'remove_customer', 'remove_administrator']
+}
