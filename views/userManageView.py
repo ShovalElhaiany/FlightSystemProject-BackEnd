@@ -5,12 +5,13 @@ from src.myApp import app, db, login_manager
 from dal.models import Users
 from validations.LoginValidations import validate_login
 
-@app.before_request
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
 def login():
+    from log import logger
+    logger.error("1111111111111111")
     data = request.get_json()
     username = data['username']
     password = data['password']
