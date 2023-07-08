@@ -1,5 +1,5 @@
-from dal.crudDal import *
-from dal.searchesDal import *
+from dataAccessLayer.crudDal import *
+from dataAccessLayer.searchesDal import *
 
 def get_flights_by_parameters_bl(origin_country_id, destination_country_id, date):
     flights = get_flights_by_parameters_dal(origin_country_id, destination_country_id, date)

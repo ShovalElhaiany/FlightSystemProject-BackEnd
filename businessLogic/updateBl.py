@@ -1,5 +1,5 @@
-from dal.crudDal import *
-from dal.searchesDal import *
+from dataAccessLayer.crudDal import *
+from dataAccessLayer.searchesDal import *
 
 def update_entity_data(entity_id, entity_data, entity_fields):
     if 'id' not in entity_data:

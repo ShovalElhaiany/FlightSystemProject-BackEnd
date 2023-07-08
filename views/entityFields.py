@@ -1,4 +1,4 @@
-from dal.models import *
+from dataAccessLayer.models import *
 
 entities_fields = {
     'Administrators': {

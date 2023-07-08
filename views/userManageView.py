@@ -1,8 +1,8 @@
 from flask import jsonify, request
 from flask_login import login_required, login_user, logout_user
 
-from src.myApp import app, db, login_manager
-from dal.models import Users
+from src.myApp import db, login_manager
+from dataAccessLayer.models import Users
 from validations.LoginValidations import validate_login
 
 @login_manager.user_loader
@@ -10,13 +10,10 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 def login():
-    from log import logger
-    logger.error("1111111111111111")
     data = request.get_json()
     username = data['username']
     password = data['password']
     validation_errors = validate_login(username, password)
-
     if validation_errors:
         return jsonify(validation_errors)
     else:

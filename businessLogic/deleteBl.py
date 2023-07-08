@@ -1,5 +1,5 @@
-from dal.crudDal import *
-from dal.searchesDal import *
+from dataAccessLayer.crudDal import *
+from dataAccessLayer.searchesDal import *
 
 def remove_entity_data(entity_id, entity_fields):
     entity = get_entity(entity_fields['model'], entity_id)

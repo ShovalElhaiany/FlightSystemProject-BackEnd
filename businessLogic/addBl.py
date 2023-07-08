@@ -1,5 +1,5 @@
-from dal.crudDal import *
-from dal.searchesDal import *
+from dataAccessLayer.crudDal import *
+from dataAccessLayer.searchesDal import *
 
 def add_entity_data(entity_data, entity_fields):
     if 'id' in entity_data:
