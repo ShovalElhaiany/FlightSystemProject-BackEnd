@@ -41,6 +41,10 @@ Once the Flight System Project is installed, you can access the system through t
 
 Refer to the project's source code and documentation for detailed information about the available endpoints, data models, and functionalities.
 
+## Acknowledgments
+
+Thanks to Danny Eram for teaching me the essential skills and knowledge required to develop this project.
+
 ## Contact
 
 If you have any questions, feedback, or issues regarding the Flight System Project, feel free to contact the project owner:
