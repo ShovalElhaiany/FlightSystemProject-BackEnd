@@ -43,7 +43,7 @@ Refer to the project's source code and documentation for detailed information ab
 
 ## Acknowledgments
 
-Thanks to Danny Eram for teaching me the essential skills and knowledge required to develop this project.
+Thanks to Danny Aram for teaching me the essential skills and knowledge required to develop this project.
 
 ## Contact
 
