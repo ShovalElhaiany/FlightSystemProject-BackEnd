@@ -2,17 +2,24 @@ from src.myApp import app
 from src.create_app import init_app
 from src.create_db import create_tables, insert_data
 import os
-LOCK_FILE = "temp/lock"
+from logs.log import logger
+
+LOCK_FILE = 'temp/lock'
 
 def deploy():
-    init_app()
-    create_tables()
-    insert_data()
+    """Deploys the application by initializing the app, creating tables, and inserting data."""
+    try:
+        init_app()
+        create_tables()
+        insert_data()
+    except Exception as e:
+        logger.critical(e)
 
 if __name__ == '__main__':
     if not os.path.exists(LOCK_FILE):
         deploy()
         open(LOCK_FILE, 'w').close()
+        logger.info('deploy was executed successfully!')
         app.run(debug=True)
     else:
         init_app()

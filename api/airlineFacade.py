@@ -3,6 +3,8 @@ from flask_login import login_required
 from flask import redirect, url_for
 
 class AirlineFacade(AnonymousFacade):
+    """Facade class for airline-specific operations."""
+
     def __init__(self, user):
         super().__init__()
         self.user = user

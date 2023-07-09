@@ -1,5 +1,5 @@
 from flask_bcrypt import check_password_hash, generate_password_hash
-from dataAccessLayer.models import Users
+from lib.dataAccessLayer.models import Users
 from src.myApp import app
 import functools
 from flask import g, redirect, url_for, request

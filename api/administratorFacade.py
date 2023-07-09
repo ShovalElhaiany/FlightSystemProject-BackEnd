@@ -1,9 +1,12 @@
 from .anonymousFacade import AnonymousFacade
 from flask_login import login_required
 from flask import redirect, url_for
-from views.crudView import add_entity_endpoint
+from lib.views.crudView import add_entity_view
+from logs.log import logger
 
 class AdministratorFacade(AnonymousFacade):
+    """Facade class for admin-specific operations."""
+
     def __init__(self):
         super().__init__()
 
@@ -16,17 +19,37 @@ class AdministratorFacade(AnonymousFacade):
     @classmethod
     @login_required
     def add_airline(self):
+        """
+        Add a airline entity.
+
+        Returns:
+            The response from the add_entity_view function.
+        """
         model= 'AirlineCompanies'
         AnonymousFacade.edit_add_entity_request(model)
-        response = add_entity_endpoint()
+        try:
+            response = add_entity_view()
+        except Exception as e:
+            logger.error(e)
+            
         return response
 
     @classmethod
     @login_required
     def add_administrator(self):
+        """
+        Add a administrator entity.
+
+        Returns:
+            The response from the add_entity_view function.
+        """
         model= 'Administrators'
         AnonymousFacade.edit_add_entity_request(model)
-        response = add_entity_endpoint()
+        try:
+            response = add_entity_view()
+        except Exception as e:
+            logger.error(e)
+
         return response
 
     @classmethod

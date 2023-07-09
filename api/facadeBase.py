@@ -1,8 +1,10 @@
 from flask import redirect, request, url_for
-from views.userManageView import create_user_with_random_data
+from lib.views.userManageView import create_user_with_random_data
 from src.config import USER_ROLES
+from logs.log import logger
 
 class FacadeBase():
+    """Base class for facade pattern implementation."""
 
     def get_all_flights(self):
         return redirect(url_for('get.get_all_entities'))
@@ -29,31 +31,51 @@ class FacadeBase():
         return redirect(url_for('get.get_entity_endpoint', entity_id=country_id))
    
     @classmethod
-    def create_new_user(self, user_role):
+    def create_new_user(user_role):
+        """
+        Creates a new user with random data and assigns a user role.
+
+        Args:
+            user_role (str): The user role for the new user.
+
+        Returns:
+            dict: Updated user data.
+
+        """
         new_user = create_user_with_random_data(user_role)
         updated_data = request.get_json()
         updated_data['user_id'] = new_user.id
 
+        logger.info('A new user has been created')
         return updated_data
 
+
     def edit_add_entity_request(model):
+        """
+        Edits the add entity request by modifying the URL and updating the request data.
+
+        Args:
+            model (str): The entity model.
+
+        """
         url_model = f'add_{model.lower()}'
         role = USER_ROLES[model]
-        
+
         def edit_url(url_model):
-            url = request.url
-            url_bp = 'add'
-            url = url.split("/")
-            if len(url) >= 4:
-                url[3]=url_bp
-                url[4]=url_model
-                new_url = "/".join(url)
+            """Edits the URL by replacing the model name."""
+            url = request.url.split('/')
+            try:
+                url[3] = 'add'
+                url[4] = url_model
+                new_url = '/'.join(url)
                 return new_url
-            
+            except Exception as e:
+                logger.error(e)
+
         new_url = edit_url(url_model)
-        updated_data = FacadeBase.create_new_user(role) 
-        
+        updated_data = FacadeBase.create_new_user(role)
+
         request.url = new_url
         request.data = updated_data
-        
-        print('The request was successfully updated!')
+
+        logger.info('The request was successfully updated!')

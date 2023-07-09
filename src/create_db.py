@@ -3,31 +3,51 @@ import os
 import json
 
 from .config import MODELS, DATA_FOLDER
+from logs.log import logger, log_and_raise
 
 def create_tables():
     """
-    Creates the db
+    Creates database tables.
+
+    This function creates tables in the database using SQLAlchemy's `create_all` method.
+    It assumes that the database is already initiated to the Flask app.
 
     Args:
-        app (Flask): The flask app to create tables for. Assumes the db is already initiated to this app
-    """    
-    db.create_all()
-    print("Tables created successfully!")
+        app (Flask): The Flask app to create tables for.
+    """
+    try:
+        db.create_all()
+        logger.info('Tables created successfully!')
+    except Exception as e:
+        log_and_raise(e, 'critical')
+
 
 def insert_data():
-    # Insert data into multiple tables
+    """
+    Inserts data into database tables.
+
+    This function inserts data into multiple tables specified in the `MODELS` list.
+    It reads JSON files containing data for each table and inserts the data into the respective table.
+
+    Raises:
+        Exception: If an error occurs during the insertion process.
+    """
     for model in MODELS:
         model_name = model.__name__
-        model_file = f"{model_name[0].lower() + model_name[1:]}Data.json"
+        model_file = f'{model_name[0].lower() + model_name[1:]}Data.json'
         json_path = os.path.join(DATA_FOLDER, model_file)
 
-        with open(json_path, 'r') as file:
-            data = json.load(file)
+        try:
+            with open(json_path, 'r') as file:
+                data = json.load(file)
 
-        # Insert data into table
-        for item in data:
-            record = model(**item)
-            db.session.add(record)
+            # Insert data into table
+            for item in data:
+                record = model(**item)
+                db.session.add(record)
 
-        db.session.commit()
-        print(f"Data inserted into {model_name} successfully!")
+            db.session.commit()
+            logger.info(f'Data inserted into {model_name} successfully!')
+
+        except Exception as e:
+            log_and_raise(e, 'critical')

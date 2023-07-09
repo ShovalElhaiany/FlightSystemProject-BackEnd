@@ -1,22 +1,41 @@
-from dataAccessLayer.models import *
+from lib.dataAccessLayer.models import *
 import os
+from logs.log import logger
 
 class DatabaseUri:
-    def intupt_uri(self):
-        userName = input("Enter user name: ") or 'root'
-        password = input("Enter password: ") or 'Shoval963654'
-        host = input("Enter host: ") or 'localhost'
-        port = input("Enter port: ") or '3306'
-        schema = input("Enter schema: ") or 'flights_system_db'
+    def input_uri(self):
+        """
+        Prompts the user to enter MySQL connection details and returns the formatted database URI.
 
+        Returns:
+            str: The formatted MySQL database URI.
+        """
+        print('\nPlease enter your MySQL connection details')
+        print('If your details match the default, please click Enter:')
+        print('\nUsername = root\nPassword = Shoval963654\nHost = localhost\nPort = 3306\nSchema = flights_system_db\n\n')
+        
+        userName = input('Enter Username: ') or 'root'
+        password = input('Enter Password: ') or 'Shoval963654'
+        host = input('Enter Host: ') or 'localhost'
+        port = input('Enter Port: ') or '3306'
+        schema = input('Enter Schema: ') or 'flights_system_db'
+
+        logger.debug(f'The input of the uri is: mysql://{userName}:{password}@{host}:{port}/{schema}')
         return f'mysql://{userName}:{password}@{host}:{port}/{schema}'
 
     def write_or_read_uri(self):
+        """
+        Writes the database URI to a file if it doesn't exist, or reads the URI from the file if it exists.
+
+        Returns:
+            str: The SQLALCHEMY_DATABASE_URI.
+        """
         URI_FILE = 'temp/uri'
 
         if not os.path.exists(URI_FILE):
             with open(URI_FILE, 'w') as file:
-                file.write(self.intupt_uri())
+                file.write(self.input_uri())
+                logger.info('The URI_FILE is created')
 
         with open(URI_FILE, 'r') as file:
             SQLALCHEMY_DATABASE_URI = file.readline().strip()
@@ -34,7 +53,7 @@ MODELS = [UserRoles, Users, Administrators, Customers, Countries, AirlineCompani
 
 MODELS_NAMES = [ MODEL.__name__ for MODEL in MODELS ]
 
-DATA_FOLDER = "data/"
+DATA_FOLDER = 'data/'
 
 USER_ROLES = {
     'Administrators': 1,
