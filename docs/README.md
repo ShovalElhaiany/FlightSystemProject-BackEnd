@@ -52,7 +52,3 @@ If you have any questions, feedback, or issues regarding the Flight System Proje
 - Name: Shoval Elhaiany
 - Phone Number: +972503413413
 - Email: shoval.elhaiany@gmail.com
-
----
-
-This concludes the README file for your Flight System Project. Make sure to update the contact information with your own details. Good luck with your project!
