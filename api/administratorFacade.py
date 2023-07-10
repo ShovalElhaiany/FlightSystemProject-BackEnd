@@ -10,12 +10,11 @@ class AdministratorFacade(AnonymousFacade):
     def __init__(self):
         super().__init__()
 
-
     @classmethod
     @login_required
     def get_all_customers(self):
         return redirect(url_for('get.get_all_entities'))
-    
+
     @classmethod
     @login_required
     def add_airline(self):
@@ -25,13 +24,12 @@ class AdministratorFacade(AnonymousFacade):
         Returns:
             The response from the add_entity_view function.
         """
-        model= 'AirlineCompanies'
+        model = 'AirlineCompanies'
         AnonymousFacade.edit_add_entity_request(model)
         try:
             response = add_entity_view()
         except Exception as e:
             logger.error(e)
-            
         return response
 
     @classmethod
@@ -43,7 +41,7 @@ class AdministratorFacade(AnonymousFacade):
         Returns:
             The response from the add_entity_view function.
         """
-        model= 'Administrators'
+        model = 'Administrators'
         AnonymousFacade.edit_add_entity_request(model)
         try:
             response = add_entity_view()
@@ -62,9 +60,7 @@ class AdministratorFacade(AnonymousFacade):
     def remove_customer(self, customer_id):
         return redirect(url_for('remove.remove_entity_endpoint', entity_id=customer_id))
 
-    
     @classmethod
     @login_required
     def remove_administrator(self, admin_id):
         return redirect(url_for('remove.remove_entity_endpoint', entity_id=admin_id))
-

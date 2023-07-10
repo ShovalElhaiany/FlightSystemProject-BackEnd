@@ -47,7 +47,7 @@ def login():
     if user:
         login_user(user)
         logger.info('Login successful!')
-        return jsonify({'message': 'Login successful!'})
+        return jsonify({'Login successful!'})
     else:
         logger.error('User not found')
         return jsonify({'error': 'Invalid username or password'})
@@ -63,7 +63,7 @@ def logout():
     """
     logout_user()
     logger.info('Logout successful!')
-    return jsonify({'message': 'Logout successful!'})
+    return jsonify({'Logout successful!'})
 
 
 def generate_random_data(length):

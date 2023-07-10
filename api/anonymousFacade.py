@@ -12,7 +12,7 @@ class AnonymousFacade(FacadeBase):
 
     @classmethod
     def login(self):
-       return redirect(url_for('user.login'))
+        return redirect(url_for('user.login'))
 
     @classmethod
     def add_customer(self):
@@ -28,5 +28,4 @@ class AnonymousFacade(FacadeBase):
             response = add_entity_view()
         except Exception as e:
             logger.error(e)
-            
         return response

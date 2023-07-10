@@ -73,7 +73,7 @@ def get_departure_flights_dal(country_id):
 
 def get_airline_by_username_dal(username):
     """Retrieve an airline company based on the username."""
-    try:    
+    try:
         return AirlineCompanies.query.join(Users).filter_by(username=username).first()
     except Exception as e:
         log_and_raise(e, 'error')
@@ -87,21 +87,21 @@ def get_airlines_by_country_dal(country_id):
 
 def get_user_by_username_dal(username):
     """Retrieve a user based on the username."""
-    try:    
+    try: 
         return Users.query.filter_by(username=username).first()
     except Exception as e:
         log_and_raise(e, 'error')
 
 def get_tickets_by_customer_dal(customer_id):
     """Retrieve tickets based on customer ID."""
-    try:    
+    try:
         return Tickets.query.filter_by(customer_id=customer_id).all()
     except Exception as e:
         log_and_raise(e, 'error')
 
 def get_customer_by_username_dal(username):
     """Retrieve a customer based on the username."""
-    try:    
+    try:
         return Customers.query.join(Users).filter(Users.username == username).first()
     except Exception as e:
         log_and_raise(e, 'error')
@@ -112,7 +112,7 @@ def get_flights_by_customer_dal(customer_id):
         customer_tickets = Tickets.query.join(Customers).filter_by(id=customer_id).all()
         flights =[]
         for ticket in customer_tickets:
-            flight = Flights.query.filter_by(id = ticket.flight_id).first()
+            flight = Flights.query.filter_by(id=ticket.flight_id).first()
             flights.append(flight)
         return flights
     except Exception as e:

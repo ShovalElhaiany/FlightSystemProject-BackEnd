@@ -51,7 +51,7 @@ class Config:
 
 MODELS = [UserRoles, Users, Administrators, Customers, Countries, AirlineCompanies, Flights, Tickets ]
 
-MODELS_NAMES = [ MODEL.__name__ for MODEL in MODELS ]
+MODELS_NAMES = [MODEL.__name__ for MODEL in MODELS]
 
 DATA_FOLDER = 'data/'
 

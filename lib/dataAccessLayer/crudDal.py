@@ -6,13 +6,13 @@ def get_entity(model, entity_id):
     try:
         return model.query.get(entity_id)
     except Exception as e:
-        log_and_raise(f'message: {e}', 'error')
+        log_and_raise(e, 'error')
 def get_all_entities(model):
     """Retrieve all entities of a specific model from the database."""
     try:
         return model.query.all()
     except Exception as e:
-        log_and_raise(f'message: {e}', 'error')
+        log_and_raise(e, 'error')
 
 def add_entity(model, entity_data):
     """
@@ -22,12 +22,12 @@ def add_entity(model, entity_data):
         model: The model class representing the entity.
         entity_data: A dictionary containing the data for the entity.
     """
-    try: 
+    try:
         entity = model(**entity_data)
         db.session.add(entity)
         db.session.commit()
     except Exception as e:
-        log_and_raise(f'message: {e}', 'error')
+        log_and_raise(e, 'error')
 
 def add_entities(model, entities_data):
     """
@@ -42,7 +42,7 @@ def add_entities(model, entities_data):
         db.session.bulk_save_objects(entities)
         db.session.commit()
     except Exception as e:
-        log_and_raise(f'message: {e}', 'error')
+        log_and_raise(e, 'error')
 
 def update_entity(entity, entity_data):
     """
@@ -57,7 +57,7 @@ def update_entity(entity, entity_data):
             setattr(entity, key, value)
         db.session.commit()
     except Exception as e:
-        log_and_raise(f'message: {e}', 'error')
+        log_and_raise(e, 'error')
 
 def remove_entity(entity):
     """
@@ -70,7 +70,7 @@ def remove_entity(entity):
         db.session.delete(entity)
         db.session.commit()
     except Exception as e:
-        log_and_raise(f'message: {e}', 'error')
+        log_and_raise(e, 'error')
 
 def remove_all_entities(model):
     """

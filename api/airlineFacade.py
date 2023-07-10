@@ -5,9 +5,8 @@ from flask import redirect, url_for
 class AirlineFacade(AnonymousFacade):
     """Facade class for airline-specific operations."""
 
-    def __init__(self, user):
+    def __init__(self):
         super().__init__()
-        self.user = user
 
     @classmethod
     @login_required
@@ -18,25 +17,18 @@ class AirlineFacade(AnonymousFacade):
     @login_required
     def add_flight(self):
         return redirect(url_for('add.add_entity_endpoint'))
-     
+
     @classmethod
     @login_required
-    def update_flight(self,flight_id):
+    def update_flight(self, flight_id):
         return redirect(url_for('update.update_entity_endpoint', entity_id=flight_id))
-
 
     @classmethod
     @login_required
     def remove_flight(self, flight_id):
         return redirect(url_for('remove.remove_entity_endpoint', entity_id=flight_id))
 
-
     @classmethod
     @login_required
     def get_my_flights(self, customer_id):
         return redirect(url_for('search.get_flights_by_customer', customer_id=customer_id))
-
-
-
- 
-   

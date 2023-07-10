@@ -33,4 +33,3 @@ activate_script = 'Scripts\\activate.bat'
 activate_path = f'{venv_path}/{activate_script}'
 
 install_requirements(activate_path, requirements_file)
-

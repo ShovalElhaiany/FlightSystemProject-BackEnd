@@ -22,7 +22,7 @@ def add_entity_data(entity_data, entity_fields):
     entity_data_filtered = {field: entity_data[field] for field in entity_fields['fields'] if field != 'id'}
     add_entity(entity_fields['model'], entity_data_filtered)
     logger.debug(f'{entity_fields["name"]} added successfully')
-    return {'message': f'{entity_fields["name"]} added successfully'}
+    return {f'{entity_fields["name"]} added successfully'}
 
 def add_entities_data(entities_data, entity_fields):
     """
@@ -50,4 +50,4 @@ def add_entities_data(entities_data, entity_fields):
 
     add_entities(entity_fields['model'], entities_data_filtered)
     logger.debug(f'{entity_fields["name"]}s successfully added')
-    return {'message': f'{entity_fields["name"]}s successfully added'}
+    return {f'{entity_fields["name"]}s successfully added'}

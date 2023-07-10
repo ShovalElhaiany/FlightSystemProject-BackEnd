@@ -29,7 +29,7 @@ def update_entity_data(entity_id, entity_data, entity_fields):
     update_entity(entity, entity_data_filtered)
 
     logger.debug(f'{entity_fields["name"]} updated successfully')
-    return {'message': f'{entity_fields["name"]} updated successfully'}
+    return {f'{entity_fields["name"]} updated successfully'}
 
 def update_entities_data(entities_data, entity_fields):
     """Updates multiple entities' data based on the given entity data and fields.

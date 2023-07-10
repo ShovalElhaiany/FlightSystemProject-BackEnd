@@ -18,7 +18,7 @@ def remove_entity_data(entity_id, entity_fields):
     if entity:
         remove_entity(entity)
         logger.debug(f'{entity_name} removed successfully')
-        return {'message': f'{entity_name} removed successfully'}
+        return {f'{entity_name} removed successfully'}
     else:
         logger.warning(f'{entity_name} not found')
         return {'error': f'{entity_name} not found'}
@@ -37,4 +37,4 @@ def remove_all_entities_data(entity_fields):
     entity_name = entity_fields['name']
     remove_all_entities(entity_model)
     logger.debug(f'All {entity_name}s removed successfully')
-    return {'message': f'All {entity_name}s removed successfully'}
+    return {f'All {entity_name}s removed successfully'}

@@ -1,5 +1,3 @@
-Sure! Here's the README file for your Flight System Project:
-
 # Flight System Project
 
 Flight System Project is a flight management system that allows airline companies to advertise flights and customers to choose the flight that suits them best at an attractive price. The system consists of a database, Business Logic layer, REST API interface, and a client-side (Front End) built in Flask.
@@ -43,6 +41,10 @@ Once the Flight System Project is installed, you can access the system through t
 
 Refer to the project's source code and documentation for detailed information about the available endpoints, data models, and functionalities.
 
+## Acknowledgments
+
+Thanks to Danny Aram for teaching me the essential skills and knowledge required to develop this project.
+
 ## Contact
 
 If you have any questions, feedback, or issues regarding the Flight System Project, feel free to contact the project owner:
@@ -50,7 +52,3 @@ If you have any questions, feedback, or issues regarding the Flight System Proje
 - Name: Shoval Elhaiany
 - Phone Number: +972503413413
 - Email: shoval.elhaiany@gmail.com
-
----
-
-This concludes the README file for your Flight System Project. Make sure to update the contact information with your own details. Good luck with your project!

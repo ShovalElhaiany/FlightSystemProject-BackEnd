@@ -23,13 +23,13 @@ class FacadeBase():
 
     def get_airline_by_parameters(self):
         return redirect(url_for('search.get_airlines_by_parameters'))
-    
+
     def get_all_countries(self):
         return redirect(url_for('get.get_all_entities'))
 
     def get_country_by_id(self, country_id):
         return redirect(url_for('get.get_entity_endpoint', entity_id=country_id))
-   
+
     @classmethod
     def create_new_user(user_role):
         """
@@ -48,7 +48,6 @@ class FacadeBase():
 
         logger.info('A new user has been created')
         return updated_data
-
 
     def edit_add_entity_request(model):
         """

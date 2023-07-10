@@ -17,7 +17,6 @@ def setup_csuRoutes():
     - Searches Routes: Adds routes for searching entities based on specific parameters.
     - User Routes: Adds routes for user-related operations such as login and logout.
     """
-    
     for model_name in MODELS_NAMES:
 
         # CRUD Routes
@@ -29,8 +28,6 @@ def setup_csuRoutes():
         update.add_url_rule(f'/{model_name.lower()}', methods=['PUT'], view_func=update_entities_view, endpoint='update_entities_endpoint')
         remove.add_url_rule(f'/{model_name.lower()}/<int:entity_id>', methods=['DELETE'], view_func=remove_entity_view, endpoint='remove_entity_endpoint')
         remove.add_url_rule(f'/{model_name.lower()}', methods=['DELETE'], view_func=remove_all_entities_view, endpoint='remove_all_entities_endpoint')
-
-    #**********************************************************************************************************************************
 
         # Searches Routes
         search.add_url_rule('/flights/parameters', methods=['GET'], view_func=get_flights_by_parameters_view, endpoint='get_flights_by_parameters')
@@ -48,8 +45,6 @@ def setup_csuRoutes():
         search.add_url_rule('/customers/username/<username>', methods=['GET'], view_func=get_customer_by_username_view, endpoint='get_customer_by_username')
         search.add_url_rule('flights/customer/<int:customer_id>', methods=['GET'], view_func=get_flights_by_customer_view, endpoint='get_flights_by_customer')
         search.add_url_rule('/airlines/parameters', methods=['GET'], view_func=get_airlines_by_parameters_view, endpoint='get_airlines_by_parameters')
-
-    #**********************************************************************************************************************************
 
         # User Routes
         user.add_url_rule('/login', methods=['POST'], view_func=login, endpoint='login')

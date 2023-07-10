@@ -5,9 +5,8 @@ from flask import redirect, url_for
 class CustomerFacade(AnonymousFacade):
     """Facade class for customer-specific operations."""
 
-    def __init__(self, user):
+    def __init__(self):
         super().__init__()
-        self.user = user
 
     @classmethod
     @login_required
