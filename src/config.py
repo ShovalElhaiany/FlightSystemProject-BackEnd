@@ -1,6 +1,8 @@
-from lib.dataAccessLayer.models import *
 import os
+
+from lib.data_access_layer.models import *
 from logs.log import logger
+
 
 class DatabaseUri:
     def input_uri(self):

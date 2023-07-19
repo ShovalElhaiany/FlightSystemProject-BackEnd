@@ -1,9 +1,11 @@
-from src.myApp import db
-import os
 import json
+import os
 
-from .config import MODELS, DATA_FOLDER
-from logs.log import logger, log_and_raise
+from logs.log import log_and_raise, logger
+from src.my_app import db
+
+from .config import DATA_FOLDER, MODELS
+
 
 def create_tables():
     """

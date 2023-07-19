@@ -1,8 +1,9 @@
-from src.myApp import app
+import os
+
+from logs.log import logger
 from src.create_app import init_app
 from src.create_db import create_tables, insert_data
-import os
-from logs.log import logger
+from src.my_app import app
 
 LOCK_FILE = 'temp/lock'
 

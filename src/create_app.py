@@ -2,14 +2,14 @@
 This module initializes the Flask application, configures it, and registers routes and blueprints.
 """
 
-from routes.csuRoutes import setup_csuRoutes
-from routes.facadesRoutes import setup_facadesRoutes
-from bluePrints.facadesBp import setup_FacadesBp
-from bluePrints.csuBp import setup_csuBp
-
-from src.config import Config
-from src.myApp import app, db, bcrypt, login_manager
+from bluePrints.csu import setup_csu_bp
+from bluePrints.facades import setup_facades_bp
 from logs.log import logger
+from routes.csu import setup_csu_routes
+from routes.facades import setup_facades_routes
+from src.config import Config
+from src.my_app import app, bcrypt, db, login_manager
+
 
 def init_app():
     """
@@ -24,12 +24,12 @@ def init_app():
     login_manager.init_app(app)
     
     # Register routes and blueprints
-    setup_csuRoutes()
-    setup_facadesRoutes()
-    setup_FacadesBp()
-    setup_csuBp()
+    setup_csu_routes()
+    setup_facades_routes()
+    setup_facades_bp()
+    setup_csu_bp()
 
-    login_manager.login_view = 'csuRoutes.login'
+    login_manager.login = 'csuRoutes.login'
 
     app.app_context().push()
 

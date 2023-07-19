@@ -1,2 +1,2 @@
-from .csuBp import *
-from .facadesBp import *
+from .csu import setup_csu_bp
+from .facades import setup_facades_bp

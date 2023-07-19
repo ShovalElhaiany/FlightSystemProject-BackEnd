@@ -1,5 +1,5 @@
-import os
 import logging
+import os
 from logging.handlers import RotatingFileHandler
 
 LOGGER_LEVEL = logging.DEBUG
@@ -29,13 +29,13 @@ def create_logger():
         file_handler = RotatingFileHandler(log_file, maxBytes=MAX_BYTES, backupCount=BACKUP_COUNT)
         file_handler.setLevel(level)
         file_handler.setFormatter(LOG_FORMAT)
-
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(level)
-        console_handler.setFormatter(LOG_FORMAT)
-
         logger.addHandler(file_handler)
-        logger.addHandler(console_handler)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(level)
+    console_handler.setFormatter(LOG_FORMAT)
+    logger.addHandler(console_handler)
+
 
     return logger
 
@@ -66,4 +66,4 @@ def log_and_raise(exception, level):
     if level == 'critical':
         logger.critical(error_msg)
 
-    raise Exception(error_msg)
+    raise error_msg
