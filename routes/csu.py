@@ -5,7 +5,7 @@ This script sets up routes for a Flask application. It imports views from variou
 from bluePrints.csu import add, get, remove, search, update, user
 from lib.views.crud import CrudViews
 from lib.views.searches import SearchesView
-from lib.views.user_manage import login, logout
+from utils.auth import login, logout
 from src.config import MODELS_NAMES
 
 
@@ -24,20 +24,20 @@ def setup_csu_routes():
         model_name = model_name.lower()
 
         """Get routes"""
-        get.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['GET'], view_func=CrudViews.get_entity, endpoint='get_entity_endpoint')
-        get.add_url_rule(f'/{model_name}', methods=['GET'], view_func=CrudViews.get_all_entities, endpoint='get_all_entities')
+        get.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['GET'], view_func=CrudViews.get_entity, endpoint='get_entity')
+        get.add_url_rule(f'/{model_name}', methods=['GET'], view_func=CrudViews.get_entities, endpoint='get_entities')
        
         """Add routes"""
-        add.add_url_rule(f'/add_{model_name}', methods=['POST'], view_func=CrudViews.add_entity, endpoint='add_entity_endpoint')
-        add.add_url_rule(f'/{model_name}', methods=['POST'], view_func=CrudViews.add_entities, endpoint='add_entities_endpoint')
+        add.add_url_rule(f'/add_{model_name}', methods=['POST'], view_func=CrudViews.add_entity, endpoint='add_entity')
+        add.add_url_rule(f'/{model_name}', methods=['POST'], view_func=CrudViews.add_entities, endpoint='add_entities')
        
         """Update routes"""
-        update.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['PUT'], view_func=CrudViews.update_entity, endpoint='update_entity_endpoint')
-        update.add_url_rule(f'/{model_name}', methods=['PUT'], view_func=CrudViews.update_entities, endpoint='update_entities_endpoint')
+        update.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['PUT'], view_func=CrudViews.update_entity, endpoint='update_entity')
+        update.add_url_rule(f'/{model_name}', methods=['PUT'], view_func=CrudViews.update_entities, endpoint='update_entities')
       
         """Remove routes"""
-        remove.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['DELETE'], view_func=CrudViews.remove_entity, endpoint='remove_entity_endpoint')
-        remove.add_url_rule(f'/{model_name}', methods=['DELETE'], view_func=CrudViews.remove_all_entities, endpoint='remove_all_entities_endpoint')
+        remove.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['DELETE'], view_func=CrudViews.remove_entity, endpoint='remove_entity')
+        remove.add_url_rule(f'/{model_name}', methods=['DELETE'], view_func=CrudViews.remove_entities, endpoint='remove_entities')
 
     # Searches Routes:
 

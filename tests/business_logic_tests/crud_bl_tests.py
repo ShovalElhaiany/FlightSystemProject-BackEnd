@@ -47,14 +47,14 @@ def test_remove_entity_data(caplog):
     assert 'TestEntity removed successfully' in caplog.text
 
 
-def test_remove_all_entities_data(caplog):
+def test_remove_entities_data(caplog):
     # Test removing all entities of a specific type
 
     entity_fields = {'model': 'TestModel', 'name': 'TestEntity'}
 
     expected_result = {'All TestEntities removed successfully'}
 
-    result = BusinessLogicRemove.remove_all_entities_data(entity_fields)
+    result = BusinessLogicRemove.remove_entities_data(entity_fields)
 
     assert result == expected_result
     assert 'All TestEntities removed successfully' in caplog.text

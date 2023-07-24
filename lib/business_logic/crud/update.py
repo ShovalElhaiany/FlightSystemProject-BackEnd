@@ -15,10 +15,6 @@ class BusinessLogicUpdate():
 
         Returns:
             dict: A dictionary containing either an error message or a success message.
-
-        Raises:
-            None
-
         """
         if 'id' not in entity_data:
             logger.warning('Missing required field: id')
@@ -33,7 +29,7 @@ class BusinessLogicUpdate():
         update_entity(entity, entity_data_filtered)
 
         logger.debug(f'{entity_fields["name"]} updated successfully')
-        return {f'{entity_fields["name"]} updated successfully'}
+        return {'msg': f'{entity_fields["name"]} updated successfully'}
 
     @staticmethod
     def update_entities_data(entities_data, entity_fields):
@@ -45,10 +41,6 @@ class BusinessLogicUpdate():
 
         Returns:
             dict: A dictionary containing a list of responses for each entity update.
-
-        Raises:
-            None
-
         """
         responses = []
         for entity_data in entities_data:

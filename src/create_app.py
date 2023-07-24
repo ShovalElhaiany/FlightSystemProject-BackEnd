@@ -22,7 +22,7 @@ def init_app():
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
-    
+
     # Register routes and blueprints
     setup_csu_routes()
     setup_facades_routes()

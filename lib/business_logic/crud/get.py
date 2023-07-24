@@ -1,4 +1,4 @@
-from lib.data_access_layer.crud import get_all_entities, get_entity
+from lib.data_access_layer.crud import get_entities, get_entity
 from logs.log import logger
 
 
@@ -15,7 +15,6 @@ class BusinessLogicGet():
 
         Returns:
             dict: A dictionary containing the entity data.
-
         """
         entity = get_entity(entity_fields['model'], entity_id)
         if entity:
@@ -35,9 +34,8 @@ class BusinessLogicGet():
 
         Returns:
             list or dict: A list of dictionaries containing the entity data, or an error dictionary if no entities are found.
-
         """
-        entities = get_all_entities(entity_fields['model'])
+        entities = get_entities(entity_fields['model'])
         if entities:
             logger.debug('All entities are found')
             return [{field: getattr(entity, field) for field in entity_fields['fields']} for entity in entities]

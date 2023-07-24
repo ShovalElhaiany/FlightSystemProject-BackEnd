@@ -6,8 +6,8 @@ from lib.business_logic.crud.add import BusinessLogicAdd
 from lib.business_logic.crud.delete import BusinessLogicRemove
 from lib.business_logic.crud.get import BusinessLogicGet
 from lib.business_logic.crud.update import BusinessLogicUpdate
-from lib.views.entity_fields import extracts_entity_fields
-from tests.business_logic_tests.crud_bl_tests import test_add_entities_data
+from utils.entity_fields import extracts_entity_fields
+from utils.user_manage import create_user
 
 
 class CrudViews():
@@ -27,7 +27,7 @@ class CrudViews():
 
     # Retrieves and returns data for all entities
     @staticmethod    
-    def get_all_entities():
+    def get_entities():
         try:
             entity_fields = extracts_entity_fields(request)
             entities_data = BusinessLogicGet.get_entities_data(entity_fields)
@@ -44,6 +44,9 @@ class CrudViews():
         try:
             entity_data = request.get_json()
             entity_fields = extracts_entity_fields(request)
+            entity_name = entity_fields['name']
+            if entity_name in ['Customers', 'AirlineCompanies', 'Administrators']:
+                create_user(entity_name)
             response = BusinessLogicAdd.add_entity_data(entity_data, entity_fields)
 
             logger.info(response)
@@ -58,6 +61,9 @@ class CrudViews():
         try:
             entity_fields = extracts_entity_fields(request)
             entities_data = request.get_json()
+            entity_name = entity_fields['name']
+            if entity_name in ['Customers', 'AirlineCompanies', 'Administrators']:
+                create_user(entity_name)
             response = BusinessLogicAdd.add_entities_data(entities_data, entity_fields)
 
             logger.info(response)
@@ -109,10 +115,10 @@ class CrudViews():
 
     # Removes all entities from the system
     @staticmethod
-    def remove_all_entities():
+    def remove_entities():
         try:
             entity_fields = extracts_entity_fields(request)
-            response = BusinessLogicRemove.remove_all_entities_data(entity_fields)
+            response = BusinessLogicRemove.remove_entities_data(entity_fields)
 
             logger.info(response)
             return jsonify(response)

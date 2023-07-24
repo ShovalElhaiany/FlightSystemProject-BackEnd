@@ -1,11 +1,11 @@
-from flask import redirect, url_for
+from flask import redirect, request, url_for
 from flask_login import login_required
 
 from lib.views.crud import CrudViews
 from logs.log import logger
+from utils.auth import role_required
 
 from .anonymous import AnonymousFacade
-from .base import edit_add_entity_request
 
 
 class AdministratorFacade(AnonymousFacade):
@@ -13,11 +13,17 @@ class AdministratorFacade(AnonymousFacade):
 
     @staticmethod
     @login_required
+    @role_required('Administrator')
     def get_all_customers():
-        return redirect(url_for('get.get_all_entities'))
+        new_path = 'get/customers'
+        request.url = AnonymousFacade.edit_url(request.url, new_path)
+        response = CrudViews.get_entities()
+        return response
+    
 
     @staticmethod
     @login_required
+    @role_required('Administrator')
     def add_airline():
         """
         Add a airline entity.
@@ -26,7 +32,7 @@ class AdministratorFacade(AnonymousFacade):
             The response from the add_entity function.
         """
         model = 'AirlineCompanies'
-        edit_add_entity_request(model)
+        AnonymousFacade.edit_add_entity_request(model)
         try:
             response = CrudViews.add_entity()
         except Exception as e:
@@ -35,6 +41,7 @@ class AdministratorFacade(AnonymousFacade):
 
     @staticmethod
     @login_required
+    @role_required('Administrator')
     def add_administrator():
         """
         Add a administrator entity.
@@ -43,25 +50,27 @@ class AdministratorFacade(AnonymousFacade):
             The response from the add_entity function.
         """
         model = 'Administrators'
-        edit_add_entity_request(model)
+        AnonymousFacade.edit_add_entity_request(model)
         try:
             response = CrudViews.add_entity()
         except Exception as e:
             logger.error(e)
-
         return response
 
     @staticmethod
     @login_required
+    @role_required('Administrator')
     def remove_airline(airline_id):
-        return redirect(url_for('remove.remove_entity_endpoint', entity_id=airline_id))
+        return redirect(url_for('remove.remove_entity', entity_id=airline_id))
 
     @staticmethod
     @login_required
+    @role_required('Administrator')
     def remove_customer(customer_id):
-        return redirect(url_for('remove.remove_entity_endpoint', entity_id=customer_id))
+        return redirect(url_for('remove.remove_entity', entity_id=customer_id))
 
     @staticmethod
     @login_required
+    @role_required('Administrator')
     def remove_administrator(admin_id):
-        return redirect(url_for('remove.remove_entity_endpoint', entity_id=admin_id))
+        return redirect(url_for('remove.remove_entity', entity_id=admin_id))

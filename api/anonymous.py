@@ -1,9 +1,10 @@
-from flask import redirect, url_for
+from flask import request
 
 from lib.views.crud import CrudViews
+from utils.auth import login
 from logs.log import logger
 
-from .base import FacadeBase, edit_add_entity_request
+from .base import FacadeBase
 
 
 class AnonymousFacade(FacadeBase):
@@ -11,7 +12,10 @@ class AnonymousFacade(FacadeBase):
 
     @staticmethod
     def login():
-        return redirect(url_for('user.login'))
+        new_path = 'user/flights'
+        request.url = FacadeBase.edit_url(request.url, new_path)
+        response = login()
+        return response
 
     @staticmethod
     def add_customer():
@@ -22,7 +26,7 @@ class AnonymousFacade(FacadeBase):
             The response from the add_entity function.
         """
         model = 'Customers'
-        edit_add_entity_request(model)
+        FacadeBase.edit_add_entity_request(model)
         try:
             response = CrudViews.add_entity()
         except Exception as e:

@@ -15,9 +15,6 @@ class BusinessLogicAdd():
 
         Returns:
             dict: A dictionary with a success message or an error message if an ID is specified.
-
-        Raises:
-            None
         """
         if 'id' in entity_data:
             logger.warning('Cannot specify id when creating a new entity')
@@ -26,7 +23,7 @@ class BusinessLogicAdd():
         entity_data_filtered = {field: entity_data[field] for field in entity_fields['fields'] if field != 'id'}
         add_entity(entity_fields['model'], entity_data_filtered)
         logger.debug(f'{entity_fields["name"]} added successfully')
-        return {f'{entity_fields["name"]} added successfully'}
+        return {'msg':f'{entity_fields["name"]} added successfully'}
 
     @staticmethod
     def add_entities_data(entities_data, entity_fields):
@@ -39,9 +36,6 @@ class BusinessLogicAdd():
 
         Returns:
             dict: A dictionary with a success message or an error message if an ID is specified.
-
-        Raises:
-            None
         """
         entities_data_filtered = [
             {field: entity_data[field] for field in entity_fields['fields'] if field != 'id'}
@@ -55,4 +49,4 @@ class BusinessLogicAdd():
 
         add_entities(entity_fields['model'], entities_data_filtered)
         logger.debug(f'{entity_fields["name"]}s successfully added')
-        return {f'{entity_fields["name"]}s successfully added'}
+        return {'msg':f'{entity_fields["name"]}s successfully added'}

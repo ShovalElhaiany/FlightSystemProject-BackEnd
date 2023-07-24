@@ -1,4 +1,4 @@
-from logs.log import log_and_raise
+from logs.log import LogLevel, log_and_raise
 from src.my_app import db
 
 
@@ -7,13 +7,13 @@ def get_entity(model, entity_id):
     try:
         return model.query.get(entity_id)
     except Exception as e:
-        log_and_raise(e, 'error')
-def get_all_entities(model):
+        log_and_raise(e, LogLevel.ERROR)
+def get_entities(model):
     """Retrieve all entities of a specific model from the database."""
     try:
         return model.query.all()
     except Exception as e:
-        log_and_raise(e, 'error')
+        log_and_raise(e, LogLevel.ERROR)
 
 def add_entity(model, entity_data):
     """
@@ -28,7 +28,7 @@ def add_entity(model, entity_data):
         db.session.add(entity)
         db.session.commit()
     except Exception as e:
-        log_and_raise(e, 'error')
+        log_and_raise(e, LogLevel.ERROR)
 
 def add_entities(model, entities_data):
     """
@@ -43,7 +43,7 @@ def add_entities(model, entities_data):
         db.session.bulk_save_objects(entities)
         db.session.commit()
     except Exception as e:
-        log_and_raise(e, 'error')
+        log_and_raise(e, LogLevel.ERROR)
 
 def update_entity(entity, entity_data):
     """
@@ -58,7 +58,7 @@ def update_entity(entity, entity_data):
             setattr(entity, key, value)
         db.session.commit()
     except Exception as e:
-        log_and_raise(e, 'error')
+        log_and_raise(e, LogLevel.ERROR)
 
 def remove_entity(entity):
     """
@@ -71,9 +71,9 @@ def remove_entity(entity):
         db.session.delete(entity)
         db.session.commit()
     except Exception as e:
-        log_and_raise(e, 'error')
+        log_and_raise(e, LogLevel.ERROR)
 
-def remove_all_entities(model):
+def remove_entities(model):
     """
     Remove all entities of a specific model from the database.
     
@@ -84,4 +84,4 @@ def remove_all_entities(model):
         model.query.delete()
         db.session.commit()
     except Exception as e:
-        log_and_raise(e, 'error')
+        log_and_raise(e, LogLevel.ERROR)

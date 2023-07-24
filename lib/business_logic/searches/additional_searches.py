@@ -1,4 +1,7 @@
-from .auxiliary_functions import handle_not_found, log_data
+from lib.data_access_layer.searches import (get_customer_by_username,
+                                            get_tickets_by_customer,
+                                            get_user_by_username)
+from logs.log import LogLevel, log_and_raise, logger
 
 
 class BusinessLogicAdditionalSearches():
@@ -14,9 +17,9 @@ class BusinessLogicAdditionalSearches():
         Returns:
             dict:The user data as a dictionary.
         """
-        user = BusinessLogicAdditionalSearches.get_user_by_username(username)
+        user = get_user_by_username(username)
         if not user:
-            handle_not_found('User')
+            log_and_raise('User not found', LogLevel.WARNING)
         user_data = {
             'id': user.id,
             'username': user.username,
@@ -24,7 +27,7 @@ class BusinessLogicAdditionalSearches():
             'email': user.email,
             'user_role': user.user_role
         }
-        log_data(user_data)
+        logger.debug(user_data)
         return user_data
 
     @staticmethod
@@ -38,13 +41,13 @@ class BusinessLogicAdditionalSearches():
         Returns:
             list: A list of ticket data dictionaries belonging to the customer.
         """
-        tickets = BusinessLogicAdditionalSearches.get_tickets_by_customer(customer_id)
+        tickets = get_tickets_by_customer(customer_id)
         if not tickets:
-            handle_not_found('Tickets')
+            log_and_raise('Tickets not found', LogLevel.WARNING)
         tickets_list = [{'id': ticket.id,
                         'flight_id': ticket.flight_id,
                         'customer_id': ticket.customer_id} for ticket in tickets]
-        log_data(tickets_list)
+        logger.debug(tickets_list)
         return tickets_list
 
     @staticmethod
@@ -58,9 +61,10 @@ class BusinessLogicAdditionalSearches():
         Returns:
             dict: The customer data as a dictionary.
         """
-        customer = BusinessLogicAdditionalSearches.get_customer_by_username(username)
+        customer = get_customer_by_username(username)
         if not customer:
-            handle_not_found('Customer')
+            log_and_raise('Customer not found', LogLevel.WARNING)
+            
         customer_data = {
             'id': customer.id,
             'first_name': customer.first_name,
@@ -70,5 +74,5 @@ class BusinessLogicAdditionalSearches():
             'credit_card_no': customer.credit_card_no,
             'user_id': customer.user_id
         }
-        log_data(customer_data)
+        logger.debug(customer_data)
         return customer_data

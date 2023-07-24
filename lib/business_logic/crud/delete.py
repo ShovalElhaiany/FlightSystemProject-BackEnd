@@ -1,4 +1,4 @@
-from lib.data_access_layer.crud import (get_entity, remove_all_entities,
+from lib.data_access_layer.crud import (get_entity, remove_entities,
                                         remove_entity)
 from logs.log import logger
 
@@ -23,13 +23,13 @@ class BusinessLogicRemove():
         if entity:
             remove_entity(entity)
             logger.debug(f'{entity_name} removed successfully')
-            return {f'{entity_name} removed successfully'}
+            return {'msg': f'{entity_name} removed successfully'}
         else:
             logger.warning(f'{entity_name} not found')
             return {'error': f'{entity_name} not found'}
 
     @staticmethod
-    def remove_all_entities_data(entity_fields):
+    def remove_entities_data(entity_fields):
         """
         Removes all entities of a specific type from the database.
 
@@ -41,6 +41,6 @@ class BusinessLogicRemove():
         """
         entity_model = entity_fields['model']
         entity_name = entity_fields['name']
-        remove_all_entities(entity_model)
+        remove_entities(entity_model)
         logger.debug(f'All {entity_name}s removed successfully')
-        return {f'All {entity_name}s removed successfully'}
+        return {'msg': f'All {entity_name}s removed successfully'}

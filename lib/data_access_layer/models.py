@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
+from werkzeug.security import check_password_hash
+
 
 from src.my_app import db
 
@@ -36,6 +38,18 @@ class Users(UserMixin, db.Model):
     password = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     user_role = db.Column(db.Integer, db.ForeignKey('user_roles.id', ondelete='CASCADE'))
+
+    def check_password(self, password):
+        """
+        Check if the provided password matches the user's hashed password.
+
+        Args:
+            password (str): The plain text password to check.
+
+        Returns:
+            bool: True if the password matches, False otherwise.
+        """
+        return check_password_hash(self.password, password)
 
     # Relationships with Customers, AirlineCompanies and Administrators, cascade deletion
     customer = relationship('Customers', backref='user', cascade='all, delete')

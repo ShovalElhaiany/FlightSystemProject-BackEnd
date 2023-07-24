@@ -1,7 +1,6 @@
 from unittest.mock import MagicMock
 
 import pytest
-
 from lib.views.crud import CrudViews
 from src.my_app import app
 
@@ -24,13 +23,13 @@ def mock_request_context():
 def test_generic(client, mock_function, mock_request_context):
     view_functions = [
         (CrudViews.get_entity, 'get_entity_data'),
-        (CrudViews.get_all_entities, 'get_entities_data'),
+        (CrudViews.get_entities, 'get_entities_data'),
         (CrudViews.add_entity, 'add_entity_data'),
         (CrudViews.add_entities, 'add_entities_data'),
         (CrudViews.update_entity, 'update_entity_data'),
         (CrudViews.update_entities, 'update_entities_data'),
         (CrudViews.remove_entity, 'remove_entity_data'),
-        (CrudViews.remove_all_entities, 'remove_all_entities_data'),
+        (CrudViews.remove_entities, 'remove_entities_data'),
     ]
     json_data = {
         "field1": "value1",

@@ -1,4 +1,6 @@
 import os
+import random
+import string
 
 from lib.data_access_layer.models import *
 from logs.log import logger
@@ -46,10 +48,14 @@ class DatabaseUri:
 
 DatabaseUri = DatabaseUri()
 
+def generate_secret_key(length=32):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+
 class Config:
     SQLALCHEMY_DATABASE_URI = DatabaseUri.write_or_read_uri()
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'flaskey'
+    SECRET_KEY = generate_secret_key()
 
 MODELS = [UserRoles, Users, Administrators, Customers, Countries, AirlineCompanies, Flights, Tickets ]
 
@@ -58,9 +64,10 @@ MODELS_NAMES = [MODEL.__name__ for MODEL in MODELS]
 DATA_FOLDER = 'data/'
 
 USER_ROLES = {
-    'Administrators': 1,
-    'Customers': 2,
-    'AirlineCompanies': 3
+    'Administrator': 1,
+    'Customer': 2,
+    'AirlineCompanie': 3,
+    'Anonymous': 4
 }
 
 ROLES_PERMISSIONS = {

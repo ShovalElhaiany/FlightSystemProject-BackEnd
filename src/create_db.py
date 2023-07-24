@@ -1,7 +1,7 @@
 import json
 import os
 
-from logs.log import log_and_raise, logger
+from logs.log import LogLevel, log_and_raise, logger
 from src.my_app import db
 
 from .config import DATA_FOLDER, MODELS
@@ -21,7 +21,7 @@ def create_tables():
         db.create_all()
         logger.info('Tables created successfully!')
     except Exception as e:
-        log_and_raise(e, 'critical')
+        log_and_raise(e, LogLevel.CRITICAL)
 
 
 def insert_data():
@@ -52,4 +52,4 @@ def insert_data():
             logger.info(f'Data inserted into {model_name} successfully!')
 
         except Exception as e:
-            log_and_raise(e, 'critical')
+            log_and_raise(e, LogLevel.CRITICAL)

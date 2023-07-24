@@ -1,5 +1,6 @@
 import logging
 import os
+from enum import Enum
 from logging.handlers import RotatingFileHandler
 
 LOGGER_LEVEL = logging.DEBUG
@@ -7,6 +8,13 @@ LOG_LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
 LOG_FORMAT = logging.Formatter("time: %(asctime)s - file: %(filename)s - level: %(levelname)s - message: {e}'%(message)s")
 MAX_BYTES = 3000
 BACKUP_COUNT = 2
+
+class LogLevel(Enum):
+    DEBUG = 'DEBUG'
+    INFO = 'INFO'
+    WARNING = 'WARNING'
+    ERROR = 'ERROR'
+    CRITICAL = 'CRITICAL'
 
 def create_logger():
     """
@@ -32,7 +40,7 @@ def create_logger():
         logger.addHandler(file_handler)
 
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(level)
+    console_handler.setLevel('INFO')
     console_handler.setFormatter(LOG_FORMAT)
     logger.addHandler(console_handler)
 
@@ -55,15 +63,15 @@ def log_and_raise(exception, level):
     """
     error_msg = exception
     
-    if level == 'debug':
+    if level == LogLevel.DEBUG:
         logger.debug(error_msg)
-    if level == 'info':
+    if level == LogLevel.INFO:
         logger.info(error_msg)
-    if level == 'warning':
+    if level == LogLevel.WARNING:
         logger.warning(error_msg)
-    if level == 'error':
+    if level == LogLevel.ERROR:
         logger.error(error_msg)
-    if level == 'critical':
+    if level == LogLevel.CRITICAL:
         logger.critical(error_msg)
 
     raise error_msg
