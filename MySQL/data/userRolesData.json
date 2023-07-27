@@ -1,0 +1,4 @@
+[{"id":1, "role_name":"Administrator"},
+ {"id":2, "role_name":"Customer"},
+ {"id":3, "role_name":"AirlineCompany"},
+ {"id":4, "role_name":"Anonymous"}]

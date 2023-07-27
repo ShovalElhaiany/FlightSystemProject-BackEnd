@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: shovalelhaiany/flight_system_project_db:latest
+    ports:
+      - "3307:3306"
+    env_file: ./.env
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "--password=$$MYSQL_ROOT_PASSWORD"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+      start_period: 20s
+  backend:
+    image: shovalelhaiany/flight_system_project_backend:latest
+    ports:
+      - "5000:5000"
+    env_file: ./.env
+    volumes:
+      - backend_data:/app/logs/
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+    #     restart: true
+  # frontend:
+  #   image: frontend:latest
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+# networks:
+#       mynetworks:
+volumes:
+  db_data:
+  backend_data:
