@@ -1,3 +1,4 @@
+from sqlalchemy.sql import text
 from logs.log import LogLevel, log_and_raise
 from src.my_app import db
 
@@ -85,3 +86,11 @@ def remove_entities(model):
         db.session.commit()
     except Exception as e:
         log_and_raise(e, LogLevel.ERROR)
+
+
+def testdb():
+    try:
+        db.session.query(text("1")).from_statement(text("SELECT 1")).all()
+        return '<h1>It works.</h1>'
+    except Exception as e:
+        return f'<h1>Something is broken.</h1><h2>{str(e)}</h2>'

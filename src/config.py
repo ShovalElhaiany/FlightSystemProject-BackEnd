@@ -1,60 +1,40 @@
-import os
 import random
 import string
+import os
 
-from lib.data_access_layer.models import *
+from lib.data_access_layer.models import (
+    UserRoles,
+    Users, 
+    Administrators, 
+    Customers, 
+    Countries, 
+    AirlineCompanies, 
+    Flights, 
+    Tickets
+)
 from logs.log import logger
 
+def input_uri():
+    """
+    Prompts the user to enter MySQL connection details and returns the formatted database URI.
 
-class DatabaseUri:
-    def input_uri(self):
-        """
-        Prompts the user to enter MySQL connection details and returns the formatted database URI.
+    Returns:
+        str: The formatted MySQL database URI.
+    """
+    userName = 'root'
+    password = os.getenv('MYSQL_ROOT_PASSWORD')
+    host = os.getenv('FLASK_DB_HOST')
+    port = '3306'
+    schema = 'flight_system_project'
 
-        Returns:
-            str: The formatted MySQL database URI.
-        """
-        print('\nPlease enter your MySQL connection details')
-        print('If your details match the default, please click Enter:')
-        print('\nUsername = root\nPassword = Shoval963654\nHost = localhost\nPort = 3306\nSchema = flights_system_db\n\n')
-        
-        userName = input('Enter Username: ') or 'root'
-        password = input('Enter Password: ') or 'Shoval963654'
-        host = input('Enter Host: ') or 'localhost'
-        port = input('Enter Port: ') or '3306'
-        schema = input('Enter Schema: ') or 'flights_system_db'
-
-        logger.debug(f'The input of the uri is: mysql://{userName}:{password}@{host}:{port}/{schema}')
-        return f'mysql://{userName}:{password}@{host}:{port}/{schema}'
-
-    def write_or_read_uri(self):
-        """
-        Writes the database URI to a file if it doesn't exist, or reads the URI from the file if it exists.
-
-        Returns:
-            str: The SQLALCHEMY_DATABASE_URI.
-        """
-        URI_FILE = 'temp/uri'
-
-        if not os.path.exists(URI_FILE):
-            with open(URI_FILE, 'w') as file:
-                file.write(self.input_uri())
-                logger.info('The URI_FILE is created')
-
-        with open(URI_FILE, 'r') as file:
-            SQLALCHEMY_DATABASE_URI = file.readline().strip()
-
-        return SQLALCHEMY_DATABASE_URI
-
-DatabaseUri = DatabaseUri()
+    logger.debug(f'The input of the uri is: mysql://{userName}:{password}@{host}:{port}/{schema}')
+    return f'mysql://{userName}:{password}@{host}:{port}/{schema}'
 
 def generate_secret_key(length=32):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-
 class Config:
-    SQLALCHEMY_DATABASE_URI = DatabaseUri.write_or_read_uri()
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = input_uri()
     SECRET_KEY = generate_secret_key()
 
 MODELS = [UserRoles, Users, Administrators, Customers, Countries, AirlineCompanies, Flights, Tickets ]

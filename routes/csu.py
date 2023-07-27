@@ -7,6 +7,7 @@ from lib.views.crud import CrudViews
 from lib.views.searches import SearchesView
 from utils.auth import login, logout
 from src.config import MODELS_NAMES
+from lib.data_access_layer.crud import testdb
 
 
 def setup_csu_routes():
@@ -65,3 +66,6 @@ def setup_csu_routes():
     
     user.add_url_rule('/login', methods=['POST'], view_func=login, endpoint='login')
     user.add_url_rule('/logout', methods=['POST'], view_func=logout, endpoint='logout')
+
+
+    user.add_url_rule('/testdb', methods=['GET'], view_func=testdb, endpoint='a')
