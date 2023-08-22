@@ -16,7 +16,7 @@ class AdministratorFacade(AnonymousFacade):
     @role_required('Administrator')
     def get_all_customers():
         new_path = 'get/customers'
-        request.url = AnonymousFacade.edit_url(request.url, new_path)
+        request.url = request.url = f'{request.host_url}{new_path}'
         response = CrudViews.get_entities()
         return response
     
@@ -60,17 +60,17 @@ class AdministratorFacade(AnonymousFacade):
     @staticmethod
     @login_required
     @role_required('Administrator')
-    def remove_airline(airline_id):
-        return redirect(url_for('remove.remove_entity', entity_id=airline_id))
+    def delete_airline(airline_id):
+        return redirect(url_for('delete.delete_entity', entity_id=airline_id))
 
     @staticmethod
     @login_required
     @role_required('Administrator')
-    def remove_customer(customer_id):
-        return redirect(url_for('remove.remove_entity', entity_id=customer_id))
+    def delete_customer(customer_id):
+        return redirect(url_for('delete.delete_entity', entity_id=customer_id))
 
     @staticmethod
     @login_required
     @role_required('Administrator')
-    def remove_administrator(admin_id):
-        return redirect(url_for('remove.remove_entity', entity_id=admin_id))
+    def delete_administrator(admin_id):
+        return redirect(url_for('delete.delete_entity', entity_id=admin_id))

@@ -52,4 +52,4 @@ def create_user(user_role):
     db.session.commit()
 
     logger.info(f'New user created and inserted into the database:\nusername: {username}\npassword: {password}\nemail: {email}.')
-    data['user_id'] = new_user.id
+    return new_user.id

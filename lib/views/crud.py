@@ -3,7 +3,7 @@ from venv import logger
 from flask import jsonify, request
 
 from lib.business_logic.crud.add import BusinessLogicAdd
-from lib.business_logic.crud.delete import BusinessLogicRemove
+from lib.business_logic.crud.delete import BusinessLogicDelete
 from lib.business_logic.crud.get import BusinessLogicGet
 from lib.business_logic.crud.update import BusinessLogicUpdate
 from utils.entity_fields import extracts_entity_fields
@@ -44,9 +44,6 @@ class CrudViews():
         try:
             entity_data = request.get_json()
             entity_fields = extracts_entity_fields(request)
-            entity_name = entity_fields['name']
-            if entity_name in ['Customers', 'AirlineCompanies', 'Administrators']:
-                create_user(entity_name)
             response = BusinessLogicAdd.add_entity_data(entity_data, entity_fields)
 
             logger.info(response)
@@ -61,9 +58,6 @@ class CrudViews():
         try:
             entity_fields = extracts_entity_fields(request)
             entities_data = request.get_json()
-            entity_name = entity_fields['name']
-            if entity_name in ['Customers', 'AirlineCompanies', 'Administrators']:
-                create_user(entity_name)
             response = BusinessLogicAdd.add_entities_data(entities_data, entity_fields)
 
             logger.info(response)
@@ -100,28 +94,28 @@ class CrudViews():
             logger.error(e)
             return jsonify({'error': 'Failed to update entities.'}), 500
 
-    # Removes a specific entity from the system
+    # Deletes a specific entity from the system
     @staticmethod
-    def remove_entity(entity_id):
+    def delete_entity(entity_id):
         try:
             entity_fields = extracts_entity_fields(request)
-            response = BusinessLogicRemove.remove_entity_data(entity_id, entity_fields)
+            response = BusinessLogicDelete.delete_entity_data(entity_id, entity_fields)
 
             logger.info(response)
             return jsonify(response)
         except Exception as e:
             logger.error(e)
-            return jsonify({'error': 'Failed to remove entity.'}), 500
+            return jsonify({'error': 'Failed to delete entity.'}), 500
 
-    # Removes all entities from the system
+    # Deletes all entities from the system
     @staticmethod
-    def remove_entities():
+    def delete_entities():
         try:
             entity_fields = extracts_entity_fields(request)
-            response = BusinessLogicRemove.remove_entities_data(entity_fields)
+            response = BusinessLogicDelete.delete_entities_data(entity_fields)
 
             logger.info(response)
             return jsonify(response)
         except Exception as e:
             logger.error(e)
-            return jsonify({'error': 'Failed to remove entities.'}), 500
+            return jsonify({'error': 'Failed to delete entities.'}), 500

@@ -1,3 +1,0 @@
-docker build -t Image_name
-docker-compose up --build
-pip freeze > requirements.txt

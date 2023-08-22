@@ -1,18 +1,22 @@
 from functools import wraps
 
-from flask import jsonify, request
+from flask import jsonify, request, Response, json
 from flask_login import current_user, login_required, login_user, logout_user
 
 from lib.data_access_layer.models import Users
 from logs.log import logger
 from src.config import USER_ROLES
 from src.my_app import login_manager
+from src.my_app import app
 
 from .user_manage import check_existing_user
 from .validations.login_validations import validate_login
 
 # Authentication and Authorization
-
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Expose-Headers'] = 'x-user-role'
+    return response
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -53,7 +57,13 @@ def login():
             # if user.check_password(password):
                 login_user(user)
                 logger.info('Login successful!')
-                return jsonify({'msg': 'Login successful!'})
+                # Create a response object with JSON data
+                response = Response(json.dumps({'msg': 'Login successful!'}), content_type="application/json")
+                # Set custom header with the user role
+                response.headers['X-User-Role'] = user.user_role
+
+                return response
+
         else:
             logger.error('User not found or invalid credentials')
             return jsonify({'error': 'Invalid username or password'})

@@ -30,8 +30,8 @@ class AirlineFacade(AnonymousFacade):
     @staticmethod
     @login_required
     @role_required('AirlineCompany')
-    def remove_flight(flight_id):
-        return redirect(url_for('remove.remove_entity', entity_id=flight_id))
+    def delete_flight(flight_id):
+        return redirect(url_for('delete.delete_entity', entity_id=flight_id))
 
     @staticmethod
     @login_required

@@ -13,7 +13,7 @@ class AnonymousFacade(FacadeBase):
     @staticmethod
     def login():
         new_path = 'user/flights'
-        request.url = FacadeBase.edit_url(request.url, new_path)
+        request.url = request.url = f'{request.host_url}{new_path}'
         response = login()
         return response
 
@@ -25,8 +25,7 @@ class AnonymousFacade(FacadeBase):
         Returns:
             The response from the add_entity function.
         """
-        model = 'Customers'
-        FacadeBase.edit_add_entity_request(model)
+        FacadeBase.edit_add_entity_request()
         try:
             response = CrudViews.add_entity()
         except Exception as e:

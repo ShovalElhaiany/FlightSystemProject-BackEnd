@@ -7,11 +7,11 @@ from .models import (AirlineCompanies, Countries, Customers, Flights, Tickets,
                      Users)
 
 
-def get_flights_by_parameters(origin_country_id, destination_country_id, date):
+def get_flights_by_parameters(origin_country_id, destination_country_id, departure_time):
     """Retrieve flights based on origin country, destination country, and date."""
     return Flights.query.filter_by(origin_country_id=origin_country_id,
                                    destination_country_id=destination_country_id,
-                                   departure_time=date).all()
+                                   departure_time=departure_time).all()
 
 def get_flights_by_airline_id(airline_id):
     """Retrieve flights based on airline ID."""

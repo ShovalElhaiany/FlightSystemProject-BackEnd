@@ -2,7 +2,7 @@
 This script sets up routes for a Flask application. It imports views from various modules and configures the routes accordingly.
 """
 
-from bluePrints.csu import add, get, remove, search, update, user
+from bluePrints.csu import add, get, delete, search, update, user
 from lib.views.crud import CrudViews
 from lib.views.searches import SearchesView
 from utils.auth import login, logout
@@ -36,14 +36,14 @@ def setup_csu_routes():
         update.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['PUT'], view_func=CrudViews.update_entity, endpoint='update_entity')
         update.add_url_rule(f'/{model_name}', methods=['PUT'], view_func=CrudViews.update_entities, endpoint='update_entities')
       
-        """Remove routes"""
-        remove.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['DELETE'], view_func=CrudViews.remove_entity, endpoint='remove_entity')
-        remove.add_url_rule(f'/{model_name}', methods=['DELETE'], view_func=CrudViews.remove_entities, endpoint='remove_entities')
+        """Delete routes"""
+        delete.add_url_rule(f'/{model_name}/<int:entity_id>', methods=['DELETE'], view_func=CrudViews.delete_entity, endpoint='delete_entity')
+        delete.add_url_rule(f'/{model_name}', methods=['DELETE'], view_func=CrudViews.delete_entities, endpoint='delete_entities')
 
     # Searches Routes:
 
     """Flights"""
-    search.add_url_rule('/flights/parameters', methods=['GET'], view_func=SearchesView.get_flights_by_parameters, endpoint='get_flights_by_parameters')
+    search.add_url_rule('/flights/parameters', methods=['POST'], view_func=SearchesView.get_flights_by_parameters, endpoint='get_flights_by_parameters')
     search.add_url_rule('/flights/airline/<int:airline_id>', methods=['GET'], view_func=SearchesView.get_flights_by_airline_id, endpoint='get_flights_by_airline_id')
     search.add_url_rule('/flights/origin-country/<int:country_id>', methods=['GET'], view_func=SearchesView.get_flights_by_origin_country_id, endpoint='get_flights_by_origin_country_id')
     search.add_url_rule('/flights/destination-country/<int:country_id>', methods=['GET'], view_func=SearchesView.get_flights_by_destination_country_id, endpoint='get_flights_by_destination_country_id')
@@ -54,7 +54,7 @@ def setup_csu_routes():
     search.add_url_rule('flights/customer/<int:customer_id>', methods=['GET'], view_func=SearchesView.get_flights_by_customer, endpoint='get_flights_by_customer')
     
     """Airlines"""
-    search.add_url_rule('/airlines/parameters', methods=['GET'], view_func=SearchesView.get_airlines_by_parameters, endpoint='get_airlines_by_parameters')
+    search.add_url_rule('/airlines/parameters', methods=['POST'], view_func=SearchesView.get_airlines_by_parameters, endpoint='get_airlines_by_parameters')
     search.add_url_rule('/airlines/username/<username>', methods=['GET'], view_func=SearchesView.get_airline_by_username, endpoint='get_airline_by_username')
     search.add_url_rule('/airlines/country/<int:country_id>', methods=['GET'], view_func=SearchesView.get_airlines_by_country, endpoint='get_airlines_by_country')
    

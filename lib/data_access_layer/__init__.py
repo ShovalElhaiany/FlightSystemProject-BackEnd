@@ -1,5 +1,5 @@
 from .crud import (add_entities, add_entity, get_entities, get_entity,
-                   remove_entities, remove_entity, update_entity)
+                   delete_entities, delete_entity, update_entity)
 from .models import (Administrators, AirlineCompanies, Countries, Customers,
                      Flights, Tickets, UserRoles, Users)
 from .searches import (get_airline_by_parameters, get_airline_by_username,

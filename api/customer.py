@@ -25,14 +25,14 @@ class CustomerFacade(AnonymousFacade):
     @staticmethod
     @login_required
     @role_required('Customer')
-    def remove_ticket(ticket_id):
-        return redirect(url_for('remove.remove_entity', entity_id=ticket_id))
+    def delete_ticket(ticket_id):
+        return redirect(url_for('delete.delete_entity', entity_id=ticket_id))
 
     @staticmethod
     @login_required
     @role_required('Customer')
     def get_my_tickets(customer_id):
         new_path = 'tickets/customer'
-        request.url = AnonymousFacade.edit_url(request.url, new_path)
+        request.url = request.url = f'{request.host_url}{new_path}'
         response = SearchesView.get_tickets_by_customer(customer_id)
         return response

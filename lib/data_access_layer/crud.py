@@ -61,12 +61,12 @@ def update_entity(entity, entity_data):
     except Exception as e:
         log_and_raise(e, LogLevel.ERROR)
 
-def remove_entity(entity):
+def delete_entity(entity):
     """
-    Remove an entity from the database.
+    Delete an entity from the database.
     
     Args:
-        entity: The entity object to be removed.
+        entity: The entity object to be deleted.
     """
     try:
         db.session.delete(entity)
@@ -74,12 +74,12 @@ def remove_entity(entity):
     except Exception as e:
         log_and_raise(e, LogLevel.ERROR)
 
-def remove_entities(model):
+def delete_entities(model):
     """
-    Remove all entities of a specific model from the database.
+    Delete all entities of a specific model from the database.
     
     Args:
-        model: The model class representing the entities to be removed.
+        model: The model class representing the entities to be deleted.
     """
     try:
         model.query.delete()

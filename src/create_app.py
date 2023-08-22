@@ -8,7 +8,7 @@ from logs.log import logger
 from routes.csu import setup_csu_routes
 from routes.facades import setup_facades_routes
 from src.config import Config
-from src.my_app import app, bcrypt, db, login_manager
+from src.my_app import app, bcrypt, db, login_manager, cors
 
 
 def init_app():
@@ -20,6 +20,7 @@ def init_app():
     
     # Initialize extensions
     db.init_app(app)
+    cors.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
 

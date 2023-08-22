@@ -1,6 +1,6 @@
 import pytest
 from lib.business_logic.crud.add import BusinessLogicAdd
-from lib.business_logic.crud.delete import BusinessLogicRemove
+from lib.business_logic.crud.delete import BusinessLogicDelete
 from lib.business_logic.crud.get import BusinessLogicGet
 from lib.business_logic.crud.update import BusinessLogicUpdate
 
@@ -39,12 +39,12 @@ def test_remove_entity_data(caplog):
     entity_id = 1
     entity_fields = {'model': 'TestModel', 'name': 'TestEntity'}
 
-    expected_result = {'TestEntity removed successfully'}
+    expected_result = {'TestEntity deleted successfully'}
 
-    result = BusinessLogicRemove.remove_entity_data(entity_id, entity_fields)
+    result = BusinessLogicDelete.remove_entity_data(entity_id, entity_fields)
 
     assert result == expected_result
-    assert 'TestEntity removed successfully' in caplog.text
+    assert 'TestEntity deleted successfully' in caplog.text
 
 
 def test_remove_entities_data(caplog):
@@ -52,12 +52,12 @@ def test_remove_entities_data(caplog):
 
     entity_fields = {'model': 'TestModel', 'name': 'TestEntity'}
 
-    expected_result = {'All TestEntities removed successfully'}
+    expected_result = {'All TestEntities deleted successfully'}
 
-    result = BusinessLogicRemove.remove_entities_data(entity_fields)
+    result = BusinessLogicDelete.remove_entities_data(entity_fields)
 
     assert result == expected_result
-    assert 'All TestEntities removed successfully' in caplog.text
+    assert 'All TestEntities deleted successfully' in caplog.text
 
 
 def test_get_entity_data(caplog):

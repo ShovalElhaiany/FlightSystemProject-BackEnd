@@ -32,8 +32,8 @@ class SearchesView():
         data = request.get_json()
         origin_country_id = data.get('origin_country_id')
         destination_country_id = data.get('destination_country_id')
-        date = data.get('date')
-        flights_list = BusinessLogicFlightsSearches.get_flights_by_parameters(origin_country_id, destination_country_id, date)
+        departure_time = data.get('departure_time')
+        flights_list = BusinessLogicFlightsSearches.get_flights_by_parameters(origin_country_id, destination_country_id, departure_time)
         return log_and_return_json(flights_list)
 
     @staticmethod

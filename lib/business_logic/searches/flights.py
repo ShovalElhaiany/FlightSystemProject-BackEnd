@@ -32,7 +32,7 @@ def get_flight_data(flights):
 class BusinessLogicFlightsSearches():
 
     @staticmethod
-    def get_flights_by_parameters(origin_country_id, destination_country_id, date):
+    def get_flights_by_parameters(origin_country_id, destination_country_id, departure_time):
         """
         Get flights based on the given origin country ID, destination country ID, and date.
 
@@ -44,7 +44,7 @@ class BusinessLogicFlightsSearches():
         Returns:
             list: A list of flight data dictionaries matching the parameters.
         """
-        flights = get_flights_by_parameters(origin_country_id, destination_country_id, date)
+        flights = get_flights_by_parameters(origin_country_id, destination_country_id, departure_time)
         if not flights:
             log_and_raise('Flights not found', LogLevel.WARNING)
         flights_list = get_flight_data(flights)
