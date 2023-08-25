@@ -35,18 +35,21 @@ def setup_facades_routes():
     airline.add_url_rule('/flights', methods=['POST'], view_func=AirlineFacade.add_flight)
     airline.add_url_rule('/flights/<int:flight_id>', methods=['PUT'], view_func=AirlineFacade.update_flight)
     airline.add_url_rule('/flights/<int:flight_id>', methods=['DELETE'], view_func=AirlineFacade.delete_flight)
-    airline.add_url_rule('/flights/customer/<int:customer_id>', methods=['GET'], view_func=AirlineFacade.get_my_flights)
+    airline.add_url_rule('/flights/airline/<int:airline_id>', methods=['GET'], view_func=AirlineFacade.get_my_flights)
 
     # administrator
     administrator.add_url_rule('/customers', methods=['GET'], view_func=AdministratorFacade.get_all_customers)
     administrator.add_url_rule('/add_airlines', methods=['POST'], view_func=AdministratorFacade.add_airline)
+    administrator.add_url_rule('/administrators', methods=['GET'], view_func=AdministratorFacade.get_all_administrators)
     administrator.add_url_rule('/add_administrators', methods=['POST'], view_func=AdministratorFacade.add_administrator)
     administrator.add_url_rule('/airlines/<int:airline_id>', methods=['DELETE'], view_func=AdministratorFacade.delete_airline)
     administrator.add_url_rule('/customers/<int:customer_id>', methods=['DELETE'], view_func=AdministratorFacade.delete_customer)
     administrator.add_url_rule('/administrators/<int:admin_id>', methods=['DELETE'], view_func=AdministratorFacade.delete_administrator)
 
     # customer
+    customer.add_url_rule('/customers/<int:customer_id>', methods=['GET'], view_func=CustomerFacade.get_customer)
     customer.add_url_rule('/customers/<int:customer_id>', methods=['PUT'], view_func=CustomerFacade.update_customer)
     customer.add_url_rule('/tickets', methods=['POST'], view_func=CustomerFacade.add_ticket)
     customer.add_url_rule('/tickets/<int:ticket_id>', methods=['DELETE'], view_func=CustomerFacade.delete_ticket)
+    customer.add_url_rule('/tickets', methods=['GET'], view_func=CustomerFacade.get_all_tickets)
     customer.add_url_rule('/tickets/customer/<int:customer_id>', methods=['GET'], view_func=CustomerFacade.get_my_tickets)

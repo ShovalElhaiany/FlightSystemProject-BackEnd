@@ -7,7 +7,6 @@ from lib.business_logic.crud.delete import BusinessLogicDelete
 from lib.business_logic.crud.get import BusinessLogicGet
 from lib.business_logic.crud.update import BusinessLogicUpdate
 from utils.entity_fields import extracts_entity_fields
-from utils.user_manage import create_user
 
 
 class CrudViews():

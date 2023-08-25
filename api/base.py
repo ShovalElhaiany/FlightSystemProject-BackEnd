@@ -1,5 +1,3 @@
-from urllib.parse import urlparse, urlunparse
-
 from flask import request
 
 from lib.views.crud import CrudViews
@@ -22,7 +20,7 @@ class FacadeBase():
     @staticmethod
     def get_flight_by_id(flight_id):
         new_path = 'get/flights'
-        request.url = request.url = f'{request.host_url}{new_path}'
+        request.url = request.url = f'{request.host_url}{new_path}/{flight_id}'
         response = CrudViews.get_entity(flight_id)
         return response
 
@@ -43,7 +41,7 @@ class FacadeBase():
     @staticmethod
     def get_airline_by_id(airline_id):
         new_path = 'get/airlinecompanies'
-        request.url = request.url = f'{request.host_url}{new_path}'
+        request.url = request.url = f'{request.host_url}{new_path}/{airline_id}'
         response = CrudViews.get_entity(airline_id)
         return response
 
@@ -64,7 +62,7 @@ class FacadeBase():
     @staticmethod
     def get_country_by_id(country_id):
         new_path = 'get/countries'
-        request.url = request.url = f'{request.host_url}{new_path}'
+        request.url = request.url = f'{request.host_url}{new_path}/{country_id}'
         response = CrudViews.get_entity(country_id)
         return response
 

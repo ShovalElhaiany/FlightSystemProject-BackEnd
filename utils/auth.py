@@ -15,7 +15,7 @@ from .validations.login_validations import validate_login
 # Authentication and Authorization
 @app.after_request
 def add_cors_headers(response):
-    response.headers['Access-Control-Expose-Headers'] = 'x-user-role'
+    response.headers['Access-Control-Expose-Headers'] = 'X-User-Role, X-User-ID'
     return response
 
 @login_manager.user_loader
@@ -61,6 +61,8 @@ def login():
                 response = Response(json.dumps({'msg': 'Login successful!'}), content_type="application/json")
                 # Set custom header with the user role
                 response.headers['X-User-Role'] = user.user_role
+                # Set custom header with the user ID
+                response.headers['X-User-ID'] = str(user.id)
 
                 return response
 

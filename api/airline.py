@@ -1,8 +1,9 @@
-from flask import redirect, url_for
+from flask import request
 from flask_login import login_required
 
 from utils.auth import role_required
-
+from lib.views.crud import CrudViews
+from lib.views.searches import SearchesView
 from .anonymous import AnonymousFacade
 
 
@@ -10,31 +11,46 @@ class AirlineFacade(AnonymousFacade):
     """Facade class for airline-specific operations."""
 
     @staticmethod
-    @login_required
-    @role_required('AirlineCompany')
+    #@login_required
+    #@role_required('AirlineCompanies')
     def update_airline(airline_id):
-        return redirect(url_for('update.update_entity', entity_id=airline_id))
+        new_path = 'update/airlinecompanies'
+        request.url = request.url = f'{request.host_url}{new_path}/{airline_id}'
+        response = CrudViews.update_entity(airline_id)
+        return response
 
     @staticmethod
-    @login_required
-    @role_required('AirlineCompany')
+    #@login_required
+    #@role_required('AirlineCompanies')
     def add_flight():
-        return redirect(url_for('add.add_entity'))
+        new_path = 'add/flights'
+        request.url = request.url = f'{request.host_url}{new_path}'
+        response = CrudViews.add_entity()
+        return response
 
     @staticmethod
-    @login_required
-    @role_required('AirlineCompany')
+    #@login_required
+    #@role_required('AirlineCompanies')
     def update_flight(flight_id):
-        return redirect(url_for('update.update_entity', entity_id=flight_id))
+        new_path = 'update/flights'
+        request.url = request.url = f'{request.host_url}{new_path}/{flight_id}'
+        response = CrudViews.update_entity(flight_id)
+        return response
 
     @staticmethod
-    @login_required
-    @role_required('AirlineCompany')
+    #@login_required
+    #@role_required('AirlineCompanies')
     def delete_flight(flight_id):
-        return redirect(url_for('delete.delete_entity', entity_id=flight_id))
+        new_path = 'delete/flights'
+        request.url = request.url = f'{request.host_url}{new_path}/{flight_id}'
+        response = CrudViews.delete_entities(flight_id)
+        return response
 
     @staticmethod
-    @login_required
-    @role_required('AirlineCompany')
-    def get_my_flights(customer_id):
-        return redirect(url_for('search.get_flights_by_customer', customer_id=customer_id))
+    #@login_required
+    #@role_required('AirlineCompanies')
+    def get_my_flights(airline_id):
+        new_path = 'search/flights/airline'
+        request.url = request.url = f'{request.host_url}{new_path}/{airline_id}'
+        response = SearchesView.get_flights_by_airline_id(airline_id)
+        return response
