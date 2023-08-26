@@ -19,6 +19,15 @@ class AdministratorFacade(AnonymousFacade):
         request.url = request.url = f'{request.host_url}{new_path}'
         response = CrudViews.get_entities()
         return response
+
+    @staticmethod
+    #@login_required
+    #@role_required('Administrators')
+    def get_customer(customer_id):
+        new_path = 'get/customers'
+        request.url = request.url = f'{request.host_url}{new_path}/{customer_id}'
+        response = CrudViews.get_entity(customer_id)
+        return response
     
     @staticmethod
     #@login_required
@@ -45,6 +54,15 @@ class AdministratorFacade(AnonymousFacade):
         request.url = request.url = f'{request.host_url}{new_path}'
         response = CrudViews.get_entities()
         return response
+    
+    @staticmethod
+    #@login_required
+    #@role_required('Administrators')
+    def get_administrator(admin_id):
+        new_path = 'get/administrators'
+        request.url = request.url = f'{request.host_url}{new_path}/{admin_id}'
+        response = CrudViews.get_entity(admin_id)
+        return response
 
     @staticmethod
     #@login_required
@@ -69,7 +87,7 @@ class AdministratorFacade(AnonymousFacade):
     def delete_airline(airline_id):
         new_path = 'delete/airlinecompanies'
         request.url = request.url = f'{request.host_url}{new_path}/{airline_id}'
-        response = CrudViews.delete_entities(airline_id)
+        response = CrudViews.delete_entity(airline_id)
         return response
 
     @staticmethod
@@ -78,7 +96,7 @@ class AdministratorFacade(AnonymousFacade):
     def delete_customer(customer_id):
         new_path = 'delete/customers'
         request.url = request.url = f'{request.host_url}{new_path}/{customer_id}'
-        response = CrudViews.delete_entities(customer_id)
+        response = CrudViews.delete_entity(customer_id)
         return response
 
     @staticmethod
@@ -87,5 +105,5 @@ class AdministratorFacade(AnonymousFacade):
     def delete_administrator(admin_id):
         new_path = 'delete/administrators'
         request.url = request.url = f'{request.host_url}{new_path}/{admin_id}'
-        response = CrudViews.delete_entities(admin_id)
+        response = CrudViews.delete_entity(admin_id)
         return response

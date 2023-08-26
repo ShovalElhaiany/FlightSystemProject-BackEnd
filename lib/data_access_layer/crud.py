@@ -9,6 +9,7 @@ def get_entity(model, entity_id):
         return model.query.get(entity_id)
     except Exception as e:
         log_and_raise(e, LogLevel.ERROR)
+        
 def get_entities(model):
     """Retrieve all entities of a specific model from the database."""
     try:

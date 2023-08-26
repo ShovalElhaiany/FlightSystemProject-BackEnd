@@ -43,7 +43,7 @@ class AirlineFacade(AnonymousFacade):
     def delete_flight(flight_id):
         new_path = 'delete/flights'
         request.url = request.url = f'{request.host_url}{new_path}/{flight_id}'
-        response = CrudViews.delete_entities(flight_id)
+        response = CrudViews.delete_entity(flight_id)
         return response
 
     @staticmethod

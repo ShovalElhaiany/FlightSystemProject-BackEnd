@@ -26,7 +26,7 @@ class FacadeBase():
 
     @staticmethod
     def get_flights_by_parameters():
-        new_path = 'flights/parameters'
+        new_path = 'search/flights/parameters'
         request.url = request.url = f'{request.host_url}{new_path}'
         response = SearchesView.get_flights_by_parameters()
         return response

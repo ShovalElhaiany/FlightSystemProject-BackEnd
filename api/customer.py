@@ -44,7 +44,7 @@ class CustomerFacade(AnonymousFacade):
     def delete_ticket(ticket_id):
         new_path = 'delete/tickets'
         request.url = request.url = f'{request.host_url}{new_path}/{ticket_id}'
-        response = CrudViews.delete_entities(ticket_id)
+        response = CrudViews.delete_entity(ticket_id)
         return response
 
     @staticmethod
@@ -54,6 +54,15 @@ class CustomerFacade(AnonymousFacade):
         new_path = 'get/tickets'
         request.url = request.url = f'{request.host_url}{new_path}'
         response = CrudViews.get_entities()
+        return response
+
+    @staticmethod
+    #@login_required
+    #@role_required('Customers')
+    def get_ticket(ticket_id):
+        new_path = 'get/tickets'
+        request.url = request.url = f'{request.host_url}{new_path}/{ticket_id}'
+        response = CrudViews.get_entity(ticket_id)
         return response
     
     @staticmethod

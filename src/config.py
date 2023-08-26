@@ -21,17 +21,11 @@ def input_uri():
     Returns:
         str: The formatted MySQL database URI.
     """
-    # userName = 'root'
-    # password = os.getenv('MYSQL_ROOT_PASSWORD')
-    # host = os.getenv('FLASK_DB_HOST')
-    # port = '3306'
-    # schema = 'flight_system_project'
-
     userName = 'root'
-    password = 'Shoval963654'
-    host = 'localhost'
+    password = os.getenv('MYSQL_ROOT_PASSWORD')
+    host = os.getenv('FLASK_DB_HOST')
     port = '3306'
-    schema = 'flights_system_db'
+    schema = 'flight_system_project'
 
     logger.debug(f'The input of the uri is: mysql://{userName}:{password}@{host}:{port}/{schema}')
     return f'mysql://{userName}:{password}@{host}:{port}/{schema}'
