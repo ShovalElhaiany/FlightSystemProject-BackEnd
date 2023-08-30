@@ -27,6 +27,12 @@ def input_uri():
     port = '3306'
     schema = 'flight_system_project'
 
+    # userName = 'root'
+    # password = 'Shoval963654'
+    # host = 'localhost'
+    # port = '3306'
+    # schema = 'flights_system_db'
+
     logger.debug(f'The input of the uri is: mysql://{userName}:{password}@{host}:{port}/{schema}')
     return f'mysql://{userName}:{password}@{host}:{port}/{schema}'
 
