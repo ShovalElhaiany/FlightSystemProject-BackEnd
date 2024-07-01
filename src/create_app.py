@@ -35,3 +35,12 @@ def init_app():
     app.app_context().push()
 
     logger.info('The app has been successfully configured!')
+    
+# def run_sql_file(filename):
+#     with app.app_context():
+#         with open(filename, 'r') as file:
+#             sql_commands = file.read().split(';')
+#             for command in sql_commands:
+#                 if command.strip():
+#                     db.session.execute(db.text(command))
+#             db.session.commit()
